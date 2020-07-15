@@ -1,5 +1,9 @@
 # Loyal Services
 
+> **Importante:**
+>
+> Este sitio Web aún no está listo para visualizarse en dispositivos móviles o de pantallas pequeñas. Esa parte será en la versión final.
+
 ## Fuentes tipográficas
 
 Se utilizarán como fuentes predeterminada:

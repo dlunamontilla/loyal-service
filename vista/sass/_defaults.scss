@@ -1,6 +1,7 @@
 // VALORES PREDETERMINADO:
 // Colores:
 $color-base: #19035b !default;
+$color-secundario: #b78717;
 
 // Proporciones:
 $width: calc(100% - 20px) !default;
@@ -13,7 +14,12 @@ $min-height: 100vh !default;
 }
 
 :root {
+  -webkit-overflow-scrolling:touch;
+  
+  -webkit-scroll-behavior: smooth;
   scroll-behavior: smooth;
+
+
 
   font: {
     family: 'Roboto', sans-serif;
