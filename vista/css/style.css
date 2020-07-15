@@ -102,6 +102,25 @@ pre, code {
 .menu__enlace {
   padding: 0 10px;
   min-height: 50px;
+  color: inherit;
+}
+
+.header {
+  background-color: #19035b;
+  color: white;
+  min-height: 100vh;
+}
+.header__text-description {
+  max-width: 50%;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+.logotipo-svg {
+  display: block;
+  margin: 20px auto;
+  max-width: 790px;
+  width: calc(100% - 20px);
 }
 
 /*# sourceMappingURL=style.css.map */

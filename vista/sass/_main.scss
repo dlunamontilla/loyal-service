@@ -16,5 +16,25 @@
   &__enlace {
     padding: 0 10px;
     min-height: 50px;
+    color: inherit;
   }
+}
+
+.header {
+  background-color: $color-base;
+  color: white;
+  min-height: 100vh;
+
+  &__text-description {
+    max-width: 50%;
+    padding: 10px;
+    line-height: 1.6;
+  }
+}
+
+.logotipo-svg {
+  display: block;
+  margin: 20px auto;
+  max-width: 790px;
+  width: $width;
 }
