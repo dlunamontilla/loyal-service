@@ -1,6 +1,6 @@
 # Loyal Services
 
-## Fuente tipográficas
+## Fuentes tipográficas
 
 Se utilizarán como fuentes predeterminada:
 
