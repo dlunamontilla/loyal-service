@@ -1,0 +1,107 @@
+@import url(../css/roboto.css);
+::-moz-focus-inner {
+  border: 0;
+}
+
+:root {
+  scroll-behavior: smooth;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #606060;
+  background-color: #f9f7ff;
+}
+
+body {
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: #19035b;
+}
+a:not([class]):hover {
+  text-decoration: underline;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*::before, *::after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.width {
+  width: calc(100% - 20px);
+}
+
+.max--width {
+  width: 1200px;
+}
+
+.min--height {
+  min-height: 100vh;
+}
+
+hr {
+  margin: 20px auto;
+  border: 0;
+  border-bottom: 1px solid #4208ef;
+}
+
+pre, code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: #c1adfc;
+  color: #19035b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 10px;
+  overflow: auto;
+  font-variant: normal;
+}
+
+.default, .predeterminado {
+  width: calc(calc(100% - 20px) - 10px);
+  max-width: 1200px;
+}
+.default:not(hr), .predeterminado:not(hr) {
+  margin: 0 auto;
+}
+
+.line--default, .line--predeterminado {
+  margin: 20px auto;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid;
+  height: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  background-color: rgba(25, 3, 91, 0.3);
+}
+.flex--between {
+  justify-content: space-between;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+.menu__enlace {
+  padding: 0 10px;
+  min-height: 50px;
+}
+
+/*# sourceMappingURL=style.css.map */

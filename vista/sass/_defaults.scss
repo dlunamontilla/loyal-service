@@ -1,0 +1,116 @@
+// VALORES PREDETERMINADO:
+// Colores:
+$color-base: #19035b !default;
+
+// Proporciones:
+$width: calc(100% - 20px) !default;
+$min-width: 100% !default;
+$max-width: 1200px !default;
+$min-height: 100vh !default;
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+:root {
+  scroll-behavior: smooth;
+
+  font: {
+    family: 'Roboto', sans-serif;
+    size: 1rem;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #606060;
+  background-color: lighten($color-base, 80);
+}
+
+body {
+  height: 100vh;
+}
+
+// Enlaces
+a {
+  text-decoration: none;
+  color: $color-base;
+
+  &:not([class]) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+* {
+  $box-sizing: border-box;
+
+  -webkit-box-sizing: $box-sizing;
+  -moz-box-sizing: $box-sizing;
+  box-sizing: $box-sizing;
+
+  &::before, &::after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+}
+
+.width {
+  width: $width;
+}
+.max {
+  &--width {
+    width: $max-width;
+  }
+}
+
+.min {
+  &--height {
+    min-height: $min-height;
+  }
+}
+
+// Linea horizontal
+hr {
+  margin: 20px auto;
+  border: 0;
+  border-bottom: 1px solid lighten($color-base, 30);
+}
+
+// pre y code
+pre, code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: lighten($color-base, 65);
+  color: $color-base;
+
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 10px;
+  overflow: auto;
+  font-variant: normal;
+}
+
+
+// Predeterminado
+.default, .predeterminado {
+  width: calc(#{$width} - 10px);
+  max-width: $max-width;
+  
+  &:not(hr) {
+    margin: 0 auto;
+  }
+}
+
+.line {
+  &--default, &--predeterminado {
+    margin: 20px auto;
+    border-left: 0; border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid;
+    height: 0;
+  }
+}
