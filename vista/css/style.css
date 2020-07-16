@@ -165,7 +165,6 @@ pre, code {
   margin: 20px auto;
   display: grid;
   grid-template-columns: repeat(var(--columnas), 1fr);
-  grid-auto-rows: 200px;
   gap: 20px;
 }
 @media screen and (min-width: 490px) and (max-width: 740px) {
@@ -184,6 +183,7 @@ pre, code {
   align-items: center;
   border-radius: 10px;
   border: 4px solid #19035b;
+  padding: 30px 20px;
 }
 .cards__img, .cards__text {
   display: flex;
@@ -196,6 +196,10 @@ pre, code {
 }
 .cards__text {
   background-color: rgba(255, 255, 255, 0.5);
+}
+.cards__title {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .button {
@@ -233,6 +237,27 @@ pre, code {
 .title--large {
   font-size: 3rem;
   text-transform: uppercase;
+}
+
+.imagen-svg {
+  max-width: 100%;
+}
+.imagen-svg--viewport {
+  --diametro: 100px;
+  transition: 300ms ease;
+  width: var(--diametro);
+  height: var(--diametro);
+}
+.imagen-svg--viewport:active {
+  transition: none;
+  transform: scale(0.98);
+}
+.imagen-svg--path {
+  transition: 300ms ease;
+  fill: #333333;
+}
+.imagen-svg--path:hover {
+  fill: #5c440c;
 }
 
 /*# sourceMappingURL=style.css.map */

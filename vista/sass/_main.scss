@@ -84,7 +84,6 @@
   margin: 20px auto;
   display: grid;
   grid-template-columns: repeat(var(--columnas), 1fr);
-  grid-auto-rows: 200px;
   gap: 20px;
 
 
@@ -102,6 +101,8 @@
     align-items: center;
     border-radius: 10px;
     border: 4px solid $color-base;
+
+    padding: 30px 20px;
   }
   
   &__img,
@@ -118,6 +119,11 @@
 
   &__text {
     background-color: rgba( white, 0.5 );
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
   }
 }
 
@@ -163,5 +169,32 @@
   &--large {
     font-size: 3rem;
     text-transform: uppercase;
+  }
+}
+
+.imagen-svg {
+  max-width: 100%;
+
+  &--viewport {
+    --diametro: 100px;
+
+    transition: 300ms ease;
+
+    width: var(--diametro);
+    height: var(--diametro);
+
+    &:active {
+      transition: none;
+      transform: scale(0.98);
+    }
+  }
+
+  &--path {
+    transition: 300ms ease;
+    fill: darken( white, 80 );
+
+    &:hover {
+      fill: darken($color-secundario, 20);
+    }
   }
 }
