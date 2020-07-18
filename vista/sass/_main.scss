@@ -7,6 +7,18 @@
   }
 }
 
+.text {
+
+  &--small-caps {
+    font-variant: small-caps;
+  }
+
+  &--label {
+    line-height: 1.2;
+    padding-bottom: 10px;
+  }
+}
+
 .menu {
   list-style: none;
   padding: 0;
@@ -25,12 +37,11 @@
   background-color: rgba( $color-base, 0.5 );
   left: 0;
   right: 0;
-
+  z-index: 10;
 }
 
-.logotipo {
+.logo {
   width: 100%;
-  padding: 20px;
 
   &__item {
     display: block;
@@ -40,19 +51,67 @@
     max-height: 60vh;
     width: $width;
   }
+
+  &--horizontal {
+    max-width: 200px;
+    width: $width;
+  }
+
+  &--vertical {
+    svg {
+      max-height: 150px;
+    }
+  }
 }
 
 .section {
   display: flex;
+  position: relative;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
 
+  --padding: 30px;
+
+  padding-top: var(--padding);
+  padding-bottom: var(--padding);
+
+  -webkit-background-attachment: fixed;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    z-index: 0;
+  }
+
   &__content {
+    position: relative;
     width: $width;
     max-width: $max-width;
-    padding: 10px;
+    z-index: 1;
+  }
+
+  &__text {
+    margin: 0 auto;
+    background-color: rgba( black, 0.2 );
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+
+    &--minimum {
+      max-width: 780px;
+      min-height: 250px;
+      min-height: 1.6;
+    }
   }
 
   &--home {
@@ -63,7 +122,60 @@
   }
 
   &--services {
-    background-color: rgba( $color-base, 0.2 );
+    background-image: url("../../multimedia/imagen/fotos/services.jpeg");
+
+    &::after {
+      $color: darken( white, 10 );
+      background-color: rgba( $color, 0.75 );
+    }
+  }
+
+  &--cards {
+    background-color: $color-base;
+    background-image: url("../../multimedia/imagen/fotos/catalogos.jpeg");
+  }
+
+  &--about {
+    background-image: url("../../multimedia/imagen/fotos/about.jpeg");
+
+    &::after {
+      background-color: rgba( white, 0.7 );
+    }
+  }
+
+  &--contact {
+    min-height: 200px;
+    padding: 0;
+    justify-content: space-between;
+    align-items: stretch;
+
+  }
+
+  &__item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20%;
+
+    @media screen and ( max-width: 550px ) {
+      flex-basis: 50%;
+    }
+
+    &--fondo {
+      display: flex;
+      background-color: $color-base;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 2;
+      flex-shrink: 2;
+      flex-basis: 40%;
+      padding: 20px;
+    }
+
+    z-index: 1;
+  }
+
+  &__button {
+    text-align: center;
   }
 }
 
@@ -99,10 +211,14 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    border-radius: 10px;
+    // border-radius: 10px;
     border: 4px solid $color-base;
-
+    transition: 300ms ease;
     padding: 30px 20px;
+
+    &:hover {
+      background-color: rgba( white, 0.5 );
+    }
   }
   
   &__img,
@@ -114,11 +230,11 @@
   }
 
   &__img {
-    background-color: rgba( $color-base, 0.3 );
+    // background-color: rgba( $color-base, 0.3 );
   }
 
   &__text {
-    background-color: rgba( white, 0.5 );
+    // background-color: rgba( white, 0.5 );
   }
 
   &__title {
@@ -127,48 +243,34 @@
   }
 }
 
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 7px;
-  background-color: lighten( $color-base, 65 );
-  max-width: max-content;
-  transition: 300ms ease;
-
-  font: {
-    size: 0.9rem;
-  }
-
-  &--tel {
-    display: flex;
-    margin: 20px auto;
-    background-color: $color-base;
-    color: white;
-    min-width: 200px;
-    justify-content: center;
-  
-    &:hover,
-    &:focus {
-      background-color: lighten( $color-base, 13 );
-    }
-
-    &:active {
-      transition: none;
-      background-color: lighten( $color-base, 20 );
-    }
-  }
-}
-
 .title {
   font-size: 2rem;
-  letter-spacing: 10px;
+  letter-spacing: 5px;
+  font-variant: small-caps;
+
   &--center {
     text-align: center;
   }
 
   &--large {
     font-size: 3rem;
+  }
+
+  &--xlager {
+    font-size: 4rem;
+  }
+
+  &--uppercase {
     text-transform: uppercase;
+  }
+
+  &--info {
+    --margin: 10px;
+
+    margin-top: var(--margin);
+    margin-bottom: var(--margin);
+    letter-spacing:0;
+    font-size: 140%;
   }
 }
 
@@ -197,4 +299,119 @@
       fill: darken($color-secundario, 20);
     }
   }
+}
+
+.grid {
+  --columnas: 1;
+  display: grid;
+  grid-template-columns: repeat( var(--columnas), 1fr );
+
+  --gap: 10px;
+
+  grid-gap: var(--gap);
+  gap: var(--gap);
+
+  @for $indice from 2 through 12 {
+    &--column-#{$indice} {
+      --columnas: #{$indice};
+
+      @if ( $indice == 2 ) {
+        @media screen and (max-width: 650px) {
+          --columnas: 1;
+        }
+      }
+    }
+  }
+
+  &__item {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__caption {
+    margin-top: 20px;
+    padding: 30px 10px;
+    text-align: center;
+  }
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: columns;
+  flex-wrap: wrap;
+
+  // Diámetro del elemento
+  --diametro: 250px;
+  
+  width: var(--diametro);
+  height: var(--diametro);
+
+  //  Colores:
+  background-color: $color-base;
+  color: white;
+
+  &--title {
+    font-size: 2rem;
+    font-variant: small-caps;
+  }
+}
+
+// Información de contacto:
+.contact {
+  --border: 2px;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__title,
+  &__info {
+    padding: 10px 20px;
+  }
+
+  &__title {
+    padding: 10px;
+  }
+
+  &__info {
+
+    &--boletin {
+      padding-top: 17px;
+
+      p {
+        padding-bottom: 7px;
+
+        &:not(:first-of-type) {
+          padding-top: 7px;
+        }
+      }
+    }
+  }
+
+
+  p {
+    margin: 0;
+  }
+
+  &--form {
+    --padding: 10px;
+
+    justify-content: flex-end;
+    margin: 0;
+    padding-right: var(--padding);
+    padding-bottom: calc(var(--padding) * 2);
+    padding-left: var(--padding);
+  }
+}
+
+// Redes Sociales y correcos electrónicos:
+.whatsapp,
+.email {
+  padding: 7px 0;
 }
