@@ -7,6 +7,9 @@
   <meta name="title" content="Loyal Services">
   <title>Loyal Services</title>
 
+  <link rel="icon" href="multimedia/imagen/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="multimedia/imagen/favicon.ico" type="image/x-icon">
+  
   <link rel="stylesheet" href="vista/css/style.css?v3">
   <script src="app/js/main.js?v1" async></script>
 </head>
@@ -52,13 +55,16 @@
       <nav class="navigation default">
         <div class="navigation flex flex--between">
           <!-- Isotipo -->
-          <div class="logo logo--horizontal" data-src="multimedia/imagen/logotipo-texto-blanco.svg"></div>
+          <a href="#home">
+            <div class="logo logo--horizontal" data-src="multimedia/imagen/loyal-services-texto-grisaceo.svg"></div>
+          </a>
   
-          <ul class="menu flex">
-            <li><a href="#home" class="menu__enlace flex">HOME</a></li>
-            <li><a href="#services" class="menu__enlace flex">Services</a></li>
-            <li><a href="#about" class="menu__enlace flex">About</a></li>
-            <li><a href="#contact" class="menu__enlace flex">Contact</a></li>
+          <ul class="menu flex" id="menu">
+            <li class="menu__item"><a href="#home" class="menu__enlace flex">HOME</a></li>
+            <li class="menu__item"><a href="#services" class="menu__enlace flex">Services</a></li>
+            <li class="menu__item"><a href="#catalogs" class="menu__enlace flex">Catalogs</a></li>
+            <li class="menu__item"><a href="#about" class="menu__enlace flex">About</a></li>
+            <li class="menu__item"><a href="#contact" class="menu__enlace flex">Contact</a></li>
           </ul>
         </div>
       </nav>
@@ -66,7 +72,7 @@
 
     <div class="content">
       <section id="home" class="section section--home">
-        <div id="logotipo" class="logo" data-src="multimedia/imagen/loyal-services-logo.svg"></div>
+        <div id="logotipo" class="logo" data-src="multimedia/imagen/loyal-services-logo-azul.svg"></div>
 
         <div class="description">
           <p class="description__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae assumenda doloribus itaque cum perspiciatis unde nulla ad laborum voluptas architecto incidunt, quod, soluta minima est dicta ullam in eligendi sit!</p>
@@ -78,8 +84,8 @@
         <div id="services-content" class="section__content"></div>
       </section>
 
-      <section id="cards" class="section section--cards">
-        <div class="section__content" id="cards-content">
+      <section id="catalogs" class="section section--cards">
+        <div class="section__content" id="catalogs-content">
           <div class="section__text section__text--minimum">
             <p class="text text--small-caps">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ducimus, a voluptatum exercitationem sapiente quod laborum dolorem! Non ut illo suscipit architecto ipsum quidem est pariatur autem earum consequatur. Dolore?</p>
             <p class="text text--small-caps">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias amet deleniti sit. Accusantium, pariatur harum. Suscipit eveniet officia facere, omnis facilis aut at labore, rem animi provident, odio nulla doloremque.</p>
@@ -131,13 +137,23 @@
               <!-- WhatsApp -->
               <div class="whatsapp">
                 <p>WhatsApp</p>
-                <p class="whatsapp__parrafo"><a class="whatsapp__enlace" href="https://api.whatsapp.com/send?phone=+1260260365&text=Mensaje%20de%20prueba" target="_blank">026-026-0365</a></p>
+                <p class="whatsapp__parrafo">
+                  <a class="whatsapp__enlace social-icon social-icon--whatsapp" href="https://api.whatsapp.com/send?phone=+1260260365&text=Mensaje%20de%20prueba" target="_blank">
+                    <span data-src="multimedia/imagen/whatsapp.svg"></span>
+                    026-026-0365
+                  </a>
+                </p>
               </div>
 
               <!-- Correo electrónico -->
               <div class="email">
                 <p>Correo electrónico</p>
-                <p><a href="mailto:correo@ejemplo.com">correo@ejemplo.com</a></p>
+                <p>
+                  <a href="mailto:correo@ejemplo.com" class="social-icon social-icon--generico">
+                    <span data-src="multimedia/imagen/envelope.svg"></span>
+                    correo@ejemplo.com
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -151,21 +167,26 @@
 
             <div class="contact__info contact__info--boletin">
               <p>Texto de relleno. Pendiente por lo que se colocará acá</p>
-              <p><a href="https://www.loyalservices.com">www.loyalservices.com</a></p>
+              <p><a href="https://www.loyalservices.com" target="_blank" class="social-icon social-icon--generico">
+                <span data-src="multimedia/imagen/globe.svg"></span>
+                www.loyalservices.com
+              </a></p>
             </div>
           </div>
         </div>
 
-        <div class="section__item">
+        <div class="section__item section__item--form">
           <div class="contact contact--form">
-            <form action="#" class="form">
-              <label>
+            <form action="./?#" class="form" method="post" id="form">
+              <label id="label-email">
                 <p class="text text--small-caps text--label">Regístrate y recibe<br> notificaciones</p>
 
                 <div class="content-input">
-                  <input type="email" name="email" id="email" class="input input--text content-input__item content-input__item--text" placeholder="Ingresa tu correo">
+                  <input type="text" name="email" id="email" class="input input--text content-input__item content-input__item--text" placeholder="Ingresa tu correo">
                   <button class="button button--primary button--circle content-input__item content-input__item--button" data-src="multimedia/imagen/angle-right.svg"></button>
                 </div>
+
+                
               </label>
             </form>
           </div>

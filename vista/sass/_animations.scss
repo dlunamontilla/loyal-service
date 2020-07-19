@@ -1,0 +1,21 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.fadeIn {
+  animation: 300ms ease fadeIn 1;
+}
+
+.fadeOut {
+  animation: 600ms ease fadeOut 1;
+}

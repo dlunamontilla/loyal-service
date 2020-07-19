@@ -20,21 +20,62 @@
 }
 
 .menu {
+  --padding: 10px;
+
   list-style: none;
   padding: 0;
-
+  
   &__enlace {
-    padding: 0 10px;
-    min-height: 50px;
+    padding: 0 var(--padding);
     color: inherit;
+    outline: none;
+    transition: 300ms ease;
+
+    &:focus {
+      color: $color-base;
+    }
+  }
+
+  &__item {
+    position: relative;
+    border-radius: 5px;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      margin: auto;
+      left: var(--padding); right: var(--padding);
+      top: auto; bottom: 0;
+      height: 0;
+      border-bottom: 2px solid;
+      transition: 300ms ease;
+      transform-origin: left center;
+      transform: rotateY( 80deg );
+      opacity: 0;
+    }
+
+    &--selected,
+    &:hover {
+      &::before {
+        transform: rotateX( 0deg );
+        opacity: 1;
+      }
+    }
+
+    &--selected {
+      &::before {
+        border-color: lighten($color-base, 20);
+      }
+    }
   }
 }
 
 .header {
   position: fixed;
   margin: auto;
-  color: white;
-  background-color: rgba( $color-base, 0.5 );
+  color: $color-secundario;
+  background-color: white;
   left: 0;
   right: 0;
   z-index: 10;
@@ -65,16 +106,20 @@
 }
 
 .section {
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  min-height: 100vh;
-
+  --display: flex;
+  --align-items: center;
+  --justify-content: center;
+  --min-height: 100vh;
   --padding: 30px;
 
-  padding-top: var(--padding);
+  display: var(--display);
+  position: relative;
+  align-items: var(--align-items);
+  flex-wrap: wrap;
+  justify-content: var(--justify-content);
+  min-height: var(--min-height);
+
+  padding-top: calc(var(--padding) * 1.5);
   padding-bottom: var(--padding);
 
   -webkit-background-attachment: fixed;
@@ -115,10 +160,12 @@
   }
 
   &--home {
-    background-color: $color-base;
-    color: white;
+    color: darken($color-secundario, 20);
     padding-top: 50px;
     padding-bottom: 50px;
+
+    background-color: white;
+    background-image: linear-gradient(to top, lighten( $color-base, 76 ), white);
   }
 
   &--services {
@@ -144,31 +191,50 @@
   }
 
   &--contact {
+    --display: grid;
+    --justify-content: initial;
+
+    @media screen and ( min-width: 1100px ) {
+      grid-template-columns: 2fr repeat( 3, 1fr );
+    }
+
+    @media screen and (min-width: 740px) and ( max-width: 1099px ) {
+      grid-template-columns: 1.5fr repeat( 2, 1fr );
+    }
+
+    @media screen and (min-width: 500px) and ( max-width: 739px ) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 499px) {
+      grid-template-columns: 1fr;
+    }
+
     min-height: 200px;
     padding: 0;
-    justify-content: space-between;
-    align-items: stretch;
 
   }
 
   &__item {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 20%;
+    --padding: 20px;
+    min-height: 100%;
+    transition: 300ms ease;
 
-    @media screen and ( max-width: 550px ) {
-      flex-basis: 50%;
-    }
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+    padding-left: 10px;
+    padding-right: 10px;
 
     &--fondo {
       display: flex;
-      background-color: $color-base;
-      justify-content: center;
       align-items: center;
-      flex-grow: 2;
-      flex-shrink: 2;
-      flex-basis: 40%;
+      background-color: $color-base;
       padding: 20px;
+    }
+
+    &--form {
+      display: flex;
+      align-items: flex-end;
     }
 
     z-index: 1;
@@ -184,7 +250,8 @@
   max-width: $max-width;
 
   &__text {
-    width: 50%;
+    width: $width;
+    max-width: 980px;
     line-height: 1.6;
     margin: 0;
   }
@@ -218,6 +285,7 @@
 
     &:hover {
       background-color: rgba( white, 0.5 );
+      border-color: $color-secundario;
     }
   }
   
@@ -401,7 +469,7 @@
 
   &--form {
     --padding: 10px;
-
+    width: 100%;
     justify-content: flex-end;
     margin: 0;
     padding-right: var(--padding);
@@ -414,4 +482,59 @@
 .whatsapp,
 .email {
   padding: 7px 0;
+}
+
+.social-icon {
+  --diametro: 17px;
+  $color-primario: darken( $color-secundario, 20 );
+  
+  color: $color-primario;
+
+  svg {
+    width: var(--diametro);
+    height: var(--diametro);
+  }
+
+  &,
+  path {
+    transition: 300ms ease;
+  }
+
+  path {
+    fill: $color-primario;
+  }
+
+  &--whatsapp {
+    $color-whatsapp: darken( $color-whatsapp, 10 );
+    
+    &:focus,
+    &:hover {
+      color: $color-whatsapp;
+
+      path {
+        fill: $color-whatsapp;
+      }
+    }
+  }
+
+
+  &--generico {
+    &:hover {
+      color: lighten( $color-base, 10 );
+
+      path {
+        fill: lighten( $color-base, 10 );
+      }
+    }
+  }
+}
+
+.warning {
+  $color: #ff6600;
+
+  display: flex;
+  align-items: center;
+  height: 40px;
+
+  color: darken( $color, 0 );
 }

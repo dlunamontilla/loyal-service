@@ -15,6 +15,8 @@
 
   &--text {
     background-color: lighten( $color-base, 75);
+    outline: none;
+    padding-right: 37px;
 
     &:focus {
       background-color: lighten( $color-base, 80 );
