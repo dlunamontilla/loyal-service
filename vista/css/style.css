@@ -285,8 +285,8 @@ pre, code {
 .header {
   position: fixed;
   margin: auto;
-  color: #757381;
-  background-color: white;
+  color: #87868a;
+  background-color: transparent;
   left: 0;
   right: 0;
   z-index: 10;
@@ -361,7 +361,7 @@ pre, code {
   min-height: 1.6;
 }
 .section--home {
-  color: #44434b;
+  color: #545456;
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: white;
@@ -471,7 +471,7 @@ pre, code {
 }
 .cards__item:hover {
   background-color: rgba(255, 255, 255, 0.5);
-  border-color: #757381;
+  border-color: #87868a;
 }
 .cards__img, .cards__text {
   display: flex;
@@ -527,7 +527,7 @@ pre, code {
   fill: #333333;
 }
 .imagen-svg--path:hover {
-  fill: #44434b;
+  fill: #545456;
 }
 
 .grid {
@@ -647,7 +647,7 @@ pre, code {
 
 .social-icon {
   --diametro: 17px;
-  color: #44434b;
+  color: #545456;
 }
 .social-icon svg {
   width: var(--diametro);
@@ -658,7 +658,7 @@ pre, code {
   transition: 300ms ease;
 }
 .social-icon path {
-  fill: #44434b;
+  fill: #545456;
 }
 .social-icon--whatsapp:focus, .social-icon--whatsapp:hover {
   color: #00b35c;
@@ -680,6 +680,45 @@ pre, code {
   color: #ff6600;
 }
 
+.portada {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+.portada__svg {
+  display: initial;
+  position: relative;
+  margin: 0 auto;
+}
+.portada__svg--left {
+  height: 65%;
+  width: calc(100% - 20px);
+}
+.portada__svg--right {
+  height: 100%;
+}
+.portada__item {
+  height: 100%;
+  transition: 300ms ease;
+}
+.portada__item--left {
+  flex-grow: 3;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(-30deg, rgba(25, 3, 91, 0.07), transparent);
+}
+.portada__item--right {
+  flex-grow: 0;
+  flex-shrink: 1;
+  background-color: #19035b;
+}
+@media screen and (orientation: portrait) {
+  .portada__item--right {
+    display: none;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -698,6 +737,20 @@ pre, code {
 
 .fadeOut {
   animation: 600ms ease fadeOut 1;
+}
+
+.color-base {
+  --color: #19035b;
+}
+.color-base--fondo {
+  background-color: var(--color);
+  color: white;
+}
+.color-base--frontal {
+  color: var(--color);
+}
+.color-base--border {
+  border-color: var(--color);
 }
 
 /*# sourceMappingURL=style.css.map */

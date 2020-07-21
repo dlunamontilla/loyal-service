@@ -1,0 +1,16 @@
+.color-base {
+  --color: #{$color-base};
+
+  &--fondo {
+    background-color: var(--color);
+    color: white;
+  }
+
+  &--frontal {
+    color: var(--color);
+  }
+
+  &--border {
+    border-color: var(--color);
+  }
+}

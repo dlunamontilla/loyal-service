@@ -75,7 +75,8 @@
   position: fixed;
   margin: auto;
   color: $color-secundario;
-  background-color: white;
+  background-color: transparent;
+
   left: 0;
   right: 0;
   z-index: 10;
@@ -537,4 +538,49 @@
   height: 40px;
 
   color: darken( $color, 0 );
+}
+
+.portada {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+
+  &__svg {
+    display: initial;
+    position: relative;
+    margin: 0 auto;
+
+    &--left {
+      height: 65%;
+      width: $width;
+    }
+
+    &--right {
+      height: 100%;
+    }
+  }
+
+  &__item {
+    height: 100%;
+    transition: 300ms ease;
+
+    &--left {
+      flex-grow: 3;
+      display: flex;
+      align-items: center;
+
+      background-image: linear-gradient(-30deg, rgba($color-base, 0.07), transparent);
+    }
+
+    &--right {
+      flex-grow: 0;
+      flex-shrink: 1;
+      background-color: $color-base;
+
+      @media screen and (orientation: portrait ) {
+        display: none;
+      }
+    }
+  }
 }

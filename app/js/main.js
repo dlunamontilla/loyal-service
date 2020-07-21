@@ -60,7 +60,11 @@ const imagen = async (_elemento, _ruta) => {
 // Validar correo:
 const isEmail = ( _correo ) => {
 	return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test( _correo );
-}
+};
+
+const isSpan = ( _isSpan ) => {
+	return Object.prototype.toString.call( _isSpan ) === "[object HTMLSpanElement]";
+};
 
 // Crear mensaje:
 const mensaje = ( _selector, _mensaje ) => {
@@ -73,8 +77,12 @@ const mensaje = ( _selector, _mensaje ) => {
 	span.classList.add( "warning", "fadeIn" );
 	span.textContent = _mensaje;
 
+	for ( let _mensaje of _elemento.childNodes )
+		if ( isSpan( _mensaje ) )
+			return;
+
 	if ( _elemento !== null )
-		_elemento.append( span );
+		_elemento.appendChild( span );
 
 	setTimeout(() => {
 		span.classList.replace( "fadeIn", "fadeOut" );
@@ -145,7 +153,7 @@ if ( typeof form !== "undefined" || typeof email !== "undefined" )
 	form.onsubmit = (e) => {
 		if ( !isEmail( email.value.trim() )) {
 			e.preventDefault();
-			mensaje( "#label-email", "Richard Arandia" );
+			mensaje( "#label-email", "Ingrese un correo válido" );
 		}
 	}
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   class="portada__svg portada__svg--right"
+   id="logo-derecha"
+   version="1.1"
+   viewBox="0 0 87.404526 191.15074">
+  <defs
+     id="defs2962" />
+  <metadata
+     id="metadata2965">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(54.285606,-59.305572)"
+     id="layer1">
+    <g
+       style="stroke-width:0.28814596"
+       id="g2820"
+       transform="matrix(3.4704631,0,0,3.4704631,-210.37512,-169.32392)">
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0864438;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2763-3"
+         width="25.185263"
+         height="55.079201"
+         x="44.976566"
+         y="65.87867" />
+      <path
+         style="opacity:1;fill:#87868a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.76238632;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 46.668171,65.87867 v 55.07932 h 1.713074 V 65.87867 Z m 5.39657,0 5.487004,7.116362 H 70.161827 V 65.87867 Z m -1.049031,1.441772 v 53.637548 h 5.342826 v -7.53184 -5.43997 -33.735411 z m 12.550655,46.456598 v 7.18095 h 6.595462 v -7.18095 z"
+         id="path115" />
+    </g>
+  </g>
+</svg>

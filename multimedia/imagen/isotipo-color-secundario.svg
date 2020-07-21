@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="123.43111mm"
+   height="145.18135mm"
+   viewBox="0 0 123.43111 145.18135"
+   version="1.1"
+   id="svg963"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="isotipo-color-secundario.svg">
+  <defs
+     id="defs957" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="570.96901"
+     inkscape:cy="284.64898"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1440"
+     inkscape:window-height="784"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata960">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-36.298082,-1.1921467)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path115-8"
+       d="M 50.522984,1.1921467 64.985115,19.949975 H 126.21794 V 1.1921467 Z m 94.693026,0 V 20.874879 124.00015 l 14.51318,18.82088 V 1.1921467 Z M 47.75578,4.9908585 V 146.3735 H 61.842545 V 126.52261 112.1851 23.259209 Z M 80.839101,127.44751 V 146.3735 H 156.7728 l -14.59276,-18.92599 z"
+       style="opacity:1;fill:#87868a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.64583349;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="rect833"
+       d="M 36.298082,1.1921467 V 146.3735 h 4.514914 V 1.1921467 Z"
+       style="opacity:1;fill:#87868a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.64583349;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>
