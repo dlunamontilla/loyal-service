@@ -21,9 +21,22 @@ $min-height: 100vh !default;
 
   line-height: 1.6;
 
+  --logo-derecha: 0;
+
   font: {
     family: 'Roboto', sans-serif;
     size: 1rem;
+  }
+
+  // Respsive aplicado al menú de navegación:
+  @media screen and ( max-width: 1000px ) {
+    --display-movil: flex;
+    --display-menu: none;
+  }
+
+  @media screen and ( min-width: 1001px ) {
+    --display-menu: flex;
+    --display-movil: none;
   }
 }
 
@@ -152,5 +165,14 @@ pre, code {
     border-top: 0;
     border-bottom: 1px solid;
     height: 0;
+  }
+}
+
+.flex {
+  display: flex;
+
+  &--center {
+    justify-content: center;
+    align-items: center;
   }
 }

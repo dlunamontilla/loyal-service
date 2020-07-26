@@ -11,7 +11,8 @@
   <link rel="shortcut icon" href="multimedia/imagen/favicon.ico" type="image/x-icon">
   
   <link rel="stylesheet" href="vista/css/style.css?v3">
-  <script src="app/js/main.js?v1" async></script>
+  <script src="app/library/smoothscroll.js"></script>
+  <script src="app/js/main.js?v1" defer></script>
 </head>
 <body>
   <template id="template-cards">
@@ -32,7 +33,7 @@
         </div>
       </div>
 
-      <div class="cards__item">
+      <div class="cards__item" data-href="#contact">
         <div class="cards__img" data-src="multimedia/imagen/phone.svg"></div>
         
         <div class="cards__text">
@@ -50,22 +51,29 @@
     <a href="tel:+16472834997" class="button button--flex button--tel button--block">647-283-4997</a>
   </template>
 
+  <template id="menu-item">
+    <li class="menu__item"><a href="#home" class="menu__enlace flex">HOME</a></li>
+    <li class="menu__item"><a href="#services" class="menu__enlace flex">Services</a></li>
+    <li class="menu__item"><a href="#catalogs" class="menu__enlace flex">Catalogs</a></li>
+    <li class="menu__item"><a href="#about" class="menu__enlace flex">About</a></li>
+    <li class="menu__item"><a href="#contact" class="menu__enlace flex">Contact</a></li>
+  </template>
+
   <main id="app" class="min-height">
     <header class="header min-height" id="header">
-      <nav class="navigation default">
+      <nav class="navigation navigation--home" id="navigation">
         <div class="navigation flex flex--between">
           <!-- Isotipo -->
-          <a href="#home">
+          <a href="#home" class="logo logo__enlace">
             <div class="logo logo--horizontal" data-src="multimedia/imagen/loyal-services-texto-grisaceo.svg"></div>
           </a>
-  
-          <ul class="menu flex" id="menu">
-            <li class="menu__item"><a href="#home" class="menu__enlace flex">HOME</a></li>
-            <li class="menu__item"><a href="#services" class="menu__enlace flex">Services</a></li>
-            <li class="menu__item"><a href="#catalogs" class="menu__enlace flex">Catalogs</a></li>
-            <li class="menu__item"><a href="#about" class="menu__enlace flex">About</a></li>
-            <li class="menu__item"><a href="#contact" class="menu__enlace flex">Contact</a></li>
-          </ul>
+          
+          <button id="menu-button" class="menu-button">
+            <span data-src="multimedia/imagen/bars.svg"></span>
+            <span>Menu</span>
+          </button>
+
+          <ul class="menu menu--responsive" id="menu"></ul>
         </div>
       </nav>
     </header>
@@ -120,7 +128,7 @@
       </section>
 
       <section id="contact" class="section section--contact">
-        <div class="section__item section__item--fondo">
+        <div class="section__item section__item--fondo flex--center">
           <div class="logo logo--vertical" data-src="multimedia/imagen/loyal-services-logo.svg"></div>
         </div>
 

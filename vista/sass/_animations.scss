@@ -1,11 +1,23 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    height: 0;
   }
 }
 
 @keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@keyframes plegar {
   to {
     opacity: 0;
     height: 0;
@@ -18,4 +30,14 @@
 
 .fadeOut {
   animation: 600ms ease fadeOut 1;
+}
+
+.desplegar {
+  transform-origin: center top;
+  animation: 300ms ease desplegar 1;
+}
+
+.plegar {
+  transform-origin: center top;
+  animation: 300ms ease plegar 1;
 }

@@ -11,7 +11,29 @@ const servicesContent = elemento("#services-content"),
 // Plantillas:
 const templateCards = elemento( "#template-cards" ),
 	templateTitle = elemento( "#template-title" ),
-	templateButtonTel = elemento( "#template-button-tel" );
+	templateButtonTel = elemento( "#template-button-tel" ),
+	menuItem = elemento( "#menu-item");
+
+// Otros elementos:
+const home = elemento( "#home" ),
+	navigation = elemento( "#navigation" ),
+	header = elemento( "#header"),
+	menuButton = elemento( "#menu-button" );
+
+const visitarSecciones = () => {
+	const hrefs = elementos( "[data-href]" );
+
+	if ( hrefs.length > 0 )
+		hrefs.forEach( href => {
+			href.addEventListener( "click", function() {
+				const _elemento = elemento( this.dataset.href );
+
+				_elemento.scrollIntoView({
+					behavior: 'smooth'
+				});
+			}, false);
+		});
+};
 
 // Función para insertar elementos del componentes en otro elemento:
 const insertar = (__parentElement, ...elementosHTML ) => {
@@ -34,6 +56,7 @@ const importNode = ( __componente ) => {
 	return document.importNode( __componente, true );
 };
 
+// Función para insertar título a partir de la plantilla:
 const createTitle = ( _text ) => {
 	if ( typeof _text !== "string" )
 		return;
@@ -44,6 +67,43 @@ const createTitle = ( _text ) => {
 	return title;
 };
 
+// Leer y editar una hoja de estilos externa. Se 
+// utilizan expresiones regulares:
+const styles = ( _styles ) => {
+	if ( typeof _styles !== "string" )
+		return;
+
+	let styles = document.styleSheets,
+		evaluar = new RegExp( `(${_styles})`, "i" ),
+		cssRules;
+
+	for ( let valor in styles )
+		if ( !isNaN( valor ) || evaluar.test( styles[valor].href ) )
+			cssRules = styles[valor].cssRules;
+
+	const panelDerecho = ( _reglaCSS ) => {
+		if ( typeof _reglaCSS === "undefined" )
+			return;
+
+		let _panelDerecho = elemento( ".portada__item--right" ),
+			width = _panelDerecho.clientWidth + "px";
+
+		_reglaCSS.style.setProperty( "--logo-derecha", width );
+	};
+
+	for ( let regla of cssRules )
+		if ( regla.selectorText === ":root" ) {
+			panelDerecho( regla );
+			
+			onresize = () => {
+				panelDerecho( regla );
+			}
+			break;
+		}
+};
+
+// Cargar imágenes vectoriales. El primer parámetro es 
+// el elemento y el segundo la ruta de la imagen vectorial:
 const imagen = async (_elemento, _ruta) => {
 	if ( typeof _ruta !== "string" )
 		return;
@@ -55,6 +115,7 @@ const imagen = async (_elemento, _ruta) => {
 		recurso = await res.text();
 
 	_elemento.insertAdjacentHTML("beforeend", recurso);
+	styles( "style.css" );
 }
 
 // Validar correo:
@@ -74,7 +135,7 @@ const mensaje = ( _selector, _mensaje ) => {
 	const _elemento = elemento( _selector ),
 		span = document.createElement( "span" );
 
-	span.classList.add( "warning", "fadeIn" );
+	span.classList.add( "warning", "desplegar" );
 	span.textContent = _mensaje;
 
 	for ( let _mensaje of _elemento.childNodes )
@@ -85,13 +146,39 @@ const mensaje = ( _selector, _mensaje ) => {
 		_elemento.appendChild( span );
 
 	setTimeout(() => {
-		span.classList.replace( "fadeIn", "fadeOut" );
+		span.classList.replace( "desplegar", "plegar" );
 
 		span.onanimationend = function() {
 			this.remove();
 		}
 
 	}, 5 * 1000 );
+};
+
+// Cambiar de forma dinámica las clase en función de las 
+// secciones en las que se encuentre el usuario:
+
+const cambiarClases = ( _claseA, _claseB, _claseC ) => {
+	if ( typeof _claseA !== "string" || typeof _claseB !== "string" || typeof _claseC !== "string" )
+		return;
+
+	if ( header !== null && home !== null && navigation !== null ) {
+			if ( scrollY >= home.offsetHeight - 50
+				&& navigation.classList.contains( _claseA )
+				&& ! header.classList.contains( _claseC ) ) {
+					
+				navigation.classList.replace( _claseA, _claseB );
+				header.classList.add( _claseC );
+
+			}else if ( scrollY <= home.offsetHeight - 50
+				&& navigation.classList.contains( _claseB )
+				&& header.classList.contains( _claseC )) {
+
+				navigation.classList.replace( _claseB, _claseA );
+				header.classList.remove( _claseC  );
+
+			}
+	}
 };
 
 // Con esta función combinada con la función «imagen( elemento, ruta )»
@@ -106,10 +193,14 @@ const imagenSVG = () => {
 		});
 };
 
-
 // Verificar si es una lista:
 const isList = ( _isList ) => {
 	return Object.prototype.toString.call( _isList ) === '[object HTMLLIElement]';
+};
+
+// Comprobar si el elemento que pasa como parámetro se trata de un enlace:
+const isLink = ( _isLink ) => {
+	return Object.prototype.toString.call( _isLink ) === "[object HTMLAnchorElement]";
 };
 
 // Obtener datos de la plantilla
@@ -140,6 +231,81 @@ const items = ( _selector, _clase ) => {
 		})
 };
 
+
+// Menú Modal:
+const menuModal = () => {
+	let modal = document.createElement( "div" ),
+		contentMenu = document.createElement( "div" ),
+		ul = document.createElement( "ul" ),
+		salir = document.createElement( "button" ),
+		_menuItem = importNode( menuItem ).content,
+		existe = false;
+
+	contentMenu.classList.add( "menu-modal__item" );
+	ul.classList.add( "menu-vertical");
+	salir.classList.add( "menu-salir" );
+	salir.textContent = "x";
+
+	salir.onclick = () => {
+		modal.remove();
+	};
+
+	ul.onclick = (e) => {
+		e.preventDefault();
+
+		// Visitar la sección que apunta el enlace:
+		if ( isLink( e.target ) ) {
+			let section = elemento( e.target.getAttribute( "href" ) );
+
+			if ( section !== null )
+				section.scrollIntoView( {behavior: 'smooth' });
+
+			modal.remove();
+		}
+	}
+
+	// Reemplazar clases:
+	const reemplazar = ( _elemento, _selector, _claseA, _claseB ) => {
+		if ( typeof _elemento === "undefined" )
+			return;
+
+		if ( typeof _claseA !== "string" || typeof _claseB !== "string" || typeof _selector !== "string" )
+			return;
+
+		let _elementos = _elemento.querySelectorAll( _selector );
+
+		for ( let __elemento of _elementos ) {
+			__elemento.classList.replace( _claseA, _claseB );
+		}
+	};
+
+	// Insertar elementos del menú en la ventana Modal:
+	insertar( contentMenu, salir, ul );
+	insertar( modal, contentMenu );
+
+	if ( menuItem !== null ) {
+		insertar( ul, _menuItem );
+
+		reemplazar( ul, "a", "menu__enlace", "menu-vertical__enlace" );
+		reemplazar( ul, "li", "menu__item", "menu-vertical__item" );
+	}
+
+	modal.classList.add( "menu-modal", "menu-modal--show" );
+
+	for ( let nodo of app.childNodes ) {
+		let elemento = typeof nodo.classList !== "undefined" && nodo.classList.contains( "menu-modal--show");
+		
+		if ( elemento ) {
+			num++;
+			existe = true;
+		}
+	}
+
+	// Comprobar si app no es nula y el nodo a insertar existe:
+	if ( app !== null && ! existe )
+		insertar( app, modal );
+}
+
 if ( typeof menu !== "undefined" || menu !== null )
 	menu.onclick = (e) => {
 		if ( ! isList( e.target.parentNode ) )
@@ -147,6 +313,16 @@ if ( typeof menu !== "undefined" || menu !== null )
 
 		items( "#menu li", "menu__item--selected" );
 		e.target.parentNode.classList.add( "menu__item--selected" );
+
+		if ( isLink( e.target )) {
+			e.preventDefault();
+			let _elemento = elemento( e.target.getAttribute("href") );
+			
+			if ( _elemento !== null )
+				_elemento.scrollIntoView({
+					behavior: 'smooth'
+				});
+		}
 	}
 
 if ( typeof form !== "undefined" || typeof email !== "undefined" )
@@ -158,12 +334,29 @@ if ( typeof form !== "undefined" || typeof email !== "undefined" )
 	}
 
 
-// onscroll = (e) => {
-// 	console.clear();
-// 	console.log( scrollY );
+// Visitar secciones en función de que un elemento tenga definido
+// el atributo [data-href]:
+visitarSecciones();
 
-// 	console.log( "Posición =>", about.offsetTop, "=>", about );
-// };
+// Se requiere actualizar las clases de la barra de navegación
+// y del elemento header en función de en qué sección se encuentre:
+onscroll = () => {
+	cambiarClases( "navigation--home", "navigation--default", "header--default" );
+};
+
+addEventListener("load", () => {
+	cambiarClases( "navigation--home", "navigation--default", "header--default" );
+
+	// Cargar menú de navegación:
+	if ( menuItem !== null && menu !== null )
+		insertar( menu, importNode( menuItem ).content );
+});
+
+// Menú de navegación:
+if ( menuButton !== null )
+	menuButton.onclick = () => {
+		menuModal();
+	}
 
 // Implementar imágenes vectoriales en los elementos con 
 // el atributo [data-src]:
