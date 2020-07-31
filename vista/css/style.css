@@ -793,7 +793,7 @@ pre, code {
   justify-content: flex-end;
   margin: 0;
   padding-right: var(--padding);
-  padding-bottom: calc(var(--padding) * 2);
+  padding-bottom: calc(var(--padding) * 4);
   padding-left: var(--padding);
 }
 
