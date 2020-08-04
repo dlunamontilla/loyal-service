@@ -130,5 +130,4 @@ class DLCookies {
   }
 }
 
-// Un comentario de prueba
 ?>

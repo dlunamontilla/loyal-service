@@ -102,8 +102,8 @@
         "affectsGlobalScope": true
       },
       "./app/js/main.ts": {
-        "version": "66a23835d38b3c0623b527ce008c79d65fc04cbacc0f8d86511d21040cc181e8",
-        "signature": "3253ba2198506ede66df72646976bd3f753d38574e924ebc0ba37fc688ff19f7",
+        "version": "46689989ada51f876d80c211c5ee84b0176dfed9554e60e043bb9aff6ba17b50",
+        "signature": "3cf03ff3dad01e1e3fe6111d949912b12feb5141d3c14cef8ae6737aa489b031",
         "affectsGlobalScope": true
       }
     },

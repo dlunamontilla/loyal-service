@@ -4,9 +4,10 @@
  * @package DLSubir
  * @author David E Luna M <davidlunamontilla@gmail.com>
  * @version 1.0.0
+ * @license MIT
  * 
- * Herramienta de validación de archivos para evitar la subida de scripts que
- * puedan compremeter la seguridad de la Web.
+ * Herramienta para subir archivos de forma amigable. Por ahora, solo admite imágenes
+ * por defecto.
  * 
  * IMPORTANTE: Esta herramienta depende de Imagick para crear thumbnails, por lo tanto,
  * se debe instalar antes utilizarla.
@@ -93,22 +94,27 @@
   }
 
   # Cambiar el tamaño de la imagen:
-  protected function vistaPrevia( string $imagen = "", $width = 100, $height = 100 ) {
+  protected function vistaPrevia( string $imagen = "", $width = 100, $height = 100 ) : string {
 
-    if ( !class_exists('Imagick') || empty(trim($imagen)) )
-      return;
+    if (
+      !class_exists('Imagick') ||
+      empty(trim($imagen))
+    ) {
+      return "Sin vista previa:\nSi utilizas «Ubuntu» o distribuciones similares puede instalarlo escribiendo \"sudo apt install php-imagick\". Si utilizas otros sistemas operativos puede visitar => https://imagemagick.org/script/download.php ";
+    }
 
     if ( !file_exists( $imagen ) )
-      return;
+      return "";
 
     if ( !$this -> validar( $imagen ) )
-      return;
+      return "";
 
     $vistaPrevia = new Imagick( $imagen );
     $vistaPrevia -> cropThumbnailImage( (int) $width, (int) $height );
 
     # Crear el directorio si no existe:
     $dir = $this -> ruta . "/" . date("Y/m") . "/thumbnail";
+
     if ( !file_exists($dir) )
       mkdir($dir, 0755, true);
 
@@ -165,7 +171,7 @@
           return [
             0 => [
               "info" => "No cuenta con suficientes permisos para crear y  enviar archivos al directorio de destino",
-              "error" => (boolean) false
+              "error" => (boolean) true
             ]
           ];
 
@@ -237,54 +243,56 @@
           
           # Si no existe la ruta de destino, se deberá crear:
           if ( !file_exists($destino) )
-            mkdir($destino, 0755, true);
+            if ( ! @mkdir( $destino, 0755, true ) )
+            return [
+              0 => [
+                "info" => "No cuenta con suficientes permisos para crear y  enviar archivos al directorio de destino",
+                "error" => (boolean) true
+              ]
+            ];
 
           # Depurar la ruta de destino:
           $destino = $destino . "/" . $this -> limpiarCadena($name[$key]);
 
-          # Mover el archivo al directorio de subida
-          # y confirmar su proceso. Si se confirma se creará
-          # un subdirectorio con las vistas previas:
+          # Mover el archivo al directorio de subida y confirmar su proceso. Si
+          # se confirma se creará un subdirectorio con las vistas previas:
           if ( move_uploaded_file($archivo, $destino) ) {
             # Comprobar si la clase DLCookies para enviar un mensaje,
             # de lo contrario se saltará este proceso:
             if ( class_exists('DLCookies') ){
               $cookie = new DLCookies();
               $cookie -> crear('mensaje', [
-                "content" => "<span class=\"success\">Se ha subido correctamente</span>",
+                "content" => "Se ha subido correctamente",
                 "duracion" => 20
               ]);
             }
 
             # Evaluar si destino existe:
             if ( !file_exists($destino) )
-              return 0;
+              return [];
               
             # Relación de aspecto de las imágenes en miniaturas:
             $aspect = $this -> aspect( $destino, $_width );
 
-            # Devolver un array, a la vez que se crean la vista previa
-            $datos["fichero"][] = $destino;
-            $datos["thumbnail"][] = $this -> vistaPrevia( $destino, $aspect["width"], $aspect["height"] );
+            $thumbnail = $this -> vistaPrevia( $destino, $aspect["width"], $aspect["height"] );
+            $error = false;
+
+            # Devolver un array, a la vez que se crean la vista previa:
+            array_push( $datos, [
+              "fichero" => $destino,
+              "thumbnail" => $thumbnail,
+              "info" => "El archivo «" . $this -> limpiarCadena( $name[$key]) . "» fue enviado correctamente",
+              "error" => (boolean) $error
+            ]);
           }
         }
       }
 
       if ( count($datos) < 1 )
-        return;
+        return [];
 
       return $datos;
     }
   }
  }
-
- $subir = new DLSubir([
-   "ruta" => "./uploads",
-   "tipo" => "imagen"
- ]);
-
-
- echo "<pre>";
- print_r( $subir -> archivo( "fichero" ) );
- echo "</pre>";
 ?>

@@ -40,14 +40,18 @@ const insertar = (__parentElement, ...elementosHTML) => {
     return;
 };
 const importNode = (__componente) => {
+    if (typeof __componente === "undefined" || __componente === null)
+        return null;
     return document.importNode(__componente, true);
 };
 const createTitle = (_text) => {
     if (typeof _text !== "string")
         return;
-    const title = importNode(templateTitle.content);
-    title.children[0].textContent = _text;
-    return title;
+    if (templateTitle !== null) {
+        const title = importNode(templateTitle.content);
+        title.children[0].textContent = _text;
+        return title;
+    }
 };
 const styles = (_styles) => {
     if (typeof _styles !== "string")
@@ -60,7 +64,7 @@ const styles = (_styles) => {
     const panelDerecho = (_reglaCSS) => {
         if (typeof _reglaCSS === "undefined")
             return;
-        let _panelDerecho = elemento(".portada__item--right"), width = _panelDerecho.clientWidth + "px";
+        let _panelDerecho = elemento(".portada__item--right"), width = (_panelDerecho !== null) ? _panelDerecho.clientWidth + "px" : 0;
         _reglaCSS.style.setProperty("--logo-derecha", width);
     };
     for (let regla of cssRules)
@@ -137,8 +141,11 @@ const isLink = (_isLink) => {
     return Object.prototype.toString.call(_isLink) === "[object HTMLAnchorElement]";
 };
 const cards = elemento("#template-cards"), title = elemento("#template-title"), buttonTel = elemento("#template-button-tel");
-insertar(servicesContent, createTitle("Services"), importNode(templateCards).content, importNode(buttonTel).content);
-insertar(aboutContent, importNode(buttonTel).content);
+let cardContent = (templateCards !== null) ? importNode(templateCards).content : null, buttont = (buttonTel !== null) ? importNode(buttonTel).content : null;
+if (cardContent !== null && buttont !== null)
+    insertar(servicesContent, createTitle("Services"), importNode(cardContent), importNode(buttont));
+if (buttont !== null)
+    insertar(aboutContent, importNode(buttont));
 const items = (_selector, _clase) => {
     if (typeof _selector !== "string" || typeof _clase !== "string")
         return;
@@ -202,7 +209,7 @@ const menuModal = () => {
         insertar(app, modal);
 };
 let menu = elemento("#menu");
-if (typeof menu !== "undefined" || menu !== null)
+if (typeof menu !== "undefined" && menu !== null)
     menu.onclick = (e) => {
         let mElement = e.target;
         if (!isList(mElement.parentNode))

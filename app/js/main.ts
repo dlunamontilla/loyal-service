@@ -58,6 +58,9 @@ const insertar = (__parentElement: Element, ...elementosHTML: Element[] ) => {
 
 // Importar nodo:
 const importNode = (__componente: any): any  => {
+	if ( typeof __componente === "undefined" || __componente === null )
+		return null;
+
 	return document.importNode(__componente, true);
 };
 
@@ -66,10 +69,13 @@ const createTitle = (_text: string) => {
 	if (typeof _text !== "string")
 		return;
 
-	const title = importNode(templateTitle.content);
-	title.children[0].textContent = _text;
+	if ( templateTitle !== null ) {
+		const title = importNode(templateTitle.content);
+		title.children[0].textContent = _text;
+	
+		return title;
+	}
 
-	return title;
 };
 
 // Leer y editar una hoja de estilos externa. Se 
@@ -92,7 +98,7 @@ const styles = ( _styles: string ) => {
 			return;
 
 		let _panelDerecho = elemento(".portada__item--right"),
-			width = _panelDerecho.clientWidth + "px";
+			width = (_panelDerecho !== null) ?_panelDerecho.clientWidth + "px" : 0;
 
 		_reglaCSS.style.setProperty("--logo-derecha", width);
 	};
@@ -215,13 +221,18 @@ const cards = elemento("#template-cards"),
 	buttonTel = elemento("#template-button-tel");
 
 // Implementar plantilla en: Services:
-insertar(servicesContent,
-	createTitle("Services"),
-	importNode(templateCards).content,
-	importNode(buttonTel).content);
+let cardContent = (templateCards !== null) ? importNode(templateCards).content : null,
+	buttont = (buttonTel !== null ) ? importNode(buttonTel).content : null;
+
+if ( cardContent !== null && buttont !== null )
+	insertar(servicesContent,
+		createTitle("Services"),
+		importNode(cardContent),
+		importNode(buttont));
 
 // Implementar botón en About:
-insertar(aboutContent, importNode(buttonTel).content);
+if ( buttont !== null )
+	insertar(aboutContent, importNode(buttont));
 
 // Obtener los enlaces del menú:
 const items = (_selector: string, _clase: string) => {
@@ -321,7 +332,7 @@ const menuModal = () => {
 }
 
 let menu = elemento( "#menu" );
-if (typeof menu !== "undefined" || menu !== null)
+if (typeof menu !== "undefined" && menu !== null)
 	menu.onclick = (e: Event) => {
 		let mElement = e.target as HTMLElement;
 		if (!isList(mElement.parentNode))

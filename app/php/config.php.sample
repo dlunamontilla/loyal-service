@@ -1,0 +1,14 @@
+<?php
+// Conexión con la base de datos:
+  $dsn = "mysql:dbname=loyalservice;host=127.0.0.1";
+  $usuario = "david";
+  $contraseña = "entorno2";
+
+# INSTANCIAR EL OBJETO PDO:
+$pdo = new PDO( $dsn, $usuario, $contraseña );
+
+## INSERTAR DATOS:
+$agregarEmail = $pdo -> prepare("INSERT INTO email VALUES(NULL, email = :email");
+$agregarServicios = $pdo -> prepare("INSERT INTO services VALUES(NULL, title = :title, description = :description");
+$agregarCatalogos = $pdo -> prepare("INSERT INTO catalogs VALUES(NULL, url = :url, thumbnail = :thumbnail, description = :description");
+$agregarAbout = $pdo -> prepare("INSERT INTO catalogs VALUES(NULL, mision = :mision, vision = :thumbnail, description = :description");
