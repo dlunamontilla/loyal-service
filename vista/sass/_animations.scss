@@ -24,6 +24,16 @@
   }
 }
 
+@keyframes login {
+  from {
+    transform: translateX( -10px ) rotateY( -10deg );
+  }
+
+  to {
+    transform: translateX( 10px ) rotateY( 10deg );
+  }
+}
+
 .fadeIn {
   animation: 300ms ease fadeIn 1;
 }
@@ -40,4 +50,8 @@
 .plegar {
   transform-origin: center top;
   animation: 300ms ease plegar 1;
+}
+
+.loginAnimation {
+  animation: 200ms linear login alternate 6;
 }

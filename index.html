@@ -12,16 +12,15 @@
   
   <link rel="stylesheet" href="vista/css/style.css?v3">
   <script src="app/library/smoothscroll.js"></script>
-  <script src="app/js/main.js?v1" defer></script>
 </head>
 <body>
   <template id="template-cards">
     <div class="cards">
-      <div class="cards__item">
+      <div class="cards__item" data-href="#about">
         <div class="cards__img" data-src="multimedia/imagen/mision.svg"></div>
         
         <div class="cards__text">
-          <span class="cards__title">Misión</span>
+          <span class="cards__title">Mission</span>
         </div>
       </div>
 
@@ -29,7 +28,7 @@
         <div class="cards__img" data-src="multimedia/imagen/servicios.svg"></div>
         
         <div class="cards__text">
-          <span class="cards__title">Nuestros Servicios</span>
+          <span class="cards__title">Our Services</span>
         </div>
       </div>
 
@@ -37,7 +36,7 @@
         <div class="cards__img" data-src="multimedia/imagen/phone.svg"></div>
         
         <div class="cards__text">
-          <span class="cards__title">Contactos</span>
+          <span class="cards__title">Contacts</span>
         </div>
       </div>
     </div>
@@ -99,20 +98,22 @@
         <div id="about-content" class="section__content">
           <h2 class="title title--center title--large">About</h2>
 
+          <!-- Misión -->
           <div class="grid grid--column-2 max-width max-width--1 max-width--center">
-            <div class="grid__item">
-              <div class="about about--title">Misión</div>
-              <div class="grid__caption">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae accusantium quo omnis eaque rerum, corrupti, voluptate neque minus sunt nesciunt officiis est aperiam. Magni, aut nesciunt debitis officiis sapiente laboriosam.
+            <div class="grid__item grid__item--about">
+              <div class="about about--title">
+                Mission
               </div>
+              <div class="grid__caption" id="get-mission"></div>
             </div>
 
-            <div class="grid__item">
-              <div class="about about--title">Visión</div>
-
-              <div class="grid__caption">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae accusantium quo omnis eaque rerum, corrupti, voluptate neque minus sunt nesciunt officiis est aperiam. Magni, aut nesciunt debitis officiis sapiente laboriosam.
+            <!-- Visión -->
+            <div class="grid__item grid__item--about">
+              <div class="about about--title">
+                Vision
               </div>
+
+              <div class="grid__caption" id="get-vision"></div>
             </div>
 
           </div>
@@ -127,13 +128,13 @@
         <div class="section__item">
           <div class="contact">
             <div class="contact__title">
-              <h3 class="title title--center title--info">Contacto</h3>
+              <h3 class="title title--center title--info">Contact</h3>
             </div>
 
             <div class="contact__info">
               <!-- WhatsApp -->
               <div class="whatsapp">
-                <p>WhatsApp</p>
+                <p>WhatsApp:</p>
                 <p class="whatsapp__parrafo">
                   <a class="whatsapp__enlace social-icon social-icon--whatsapp" href="https://api.whatsapp.com/send?phone=16477004965&text=Mensaje%20de%20prueba" target="_blank">
                     <span data-src="multimedia/imagen/whatsapp.svg"></span>
@@ -144,11 +145,11 @@
 
               <!-- Correo electrónico -->
               <div class="email">
-                <p>Correo electrónico</p>
+                <p>Email:</p>
                 <p>
-                  <a href="mailto:correo@ejemplo.com" class="social-icon social-icon--generico">
+                  <a href="mailto:contact@loyalservicesca.com" class="social-icon social-icon--generico">
                     <span data-src="multimedia/imagen/envelope.svg"></span>
-                    correo@ejemplo.com
+                    contact@loyalservicesca.com
                   </a>
                 </p>
               </div>
@@ -159,15 +160,26 @@
         <div class="section__item">
           <div class="contact">
             <div class="contact__title">
-              <h3 class="title title--center title--info">Boletín de Noticias</h3>
+              <h3 class="title title--center title--info">Calendar</h3>
             </div>
 
-            <div class="contact__info contact__info--boletin">
-              <p>Texto de relleno. Pendiente por lo que se colocará acá</p>
-              <p><a href="https://www.loyalservicesca.com/" target="_blank" class="social-icon social-icon--generico">
-                <span data-src="multimedia/imagen/globe.svg"></span>
-                www.loyalservicesca.com
-              </a></p>
+            <!-- Ir al calendario -->
+            <div id="calendar">
+              <a href="#view-calendar" class="calendar--enlace">
+                <div data-src="multimedia/imagen/calendario.svg"></div>
+                <p>Go to the calendar</p>
+              </a>
+            </div>
+
+            <!-- Sitio Web -->
+            <div class="website">
+              <p>Website:</p>
+              <p>
+                <a href="https://www.loyalservicesca.com/" target="_blank" class="social-icon social-icon--generico">
+                  <span data-src="multimedia/imagen/globe.svg"></span>
+                  www.loyalservicesca.com
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -176,22 +188,22 @@
           <div class="contact contact--form">
             <form action="./?#" class="form" method="post" id="form">
               <label id="label-email">
-                <p class="text text--small-caps text--label">Regístrate y recibe<br> notificaciones</p>
+                <p class="text text--small-caps text--label">Subscribe and receive <br>notifications</p>
 
                 <div class="content-input">
-                  <input type="text" name="email" id="email" class="input input--text content-input__item content-input__item--text" placeholder="Ingresa tu correo">
+                  <input type="text" name="email" id="email" class="input input--text content-input__item content-input__item--text" placeholder="Enter your email" autocomplete="off">
                   <button class="button button--primary button--circle content-input__item content-input__item--button" data-src="multimedia/imagen/angle-right.svg"></button>
                 </div>
-
-                
               </label>
             </form>
           </div>
         </div>
       </section>
     </div>
-
-    <script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/bfef34bca6fccbcdf880f98b3217e8b626f121a7020d64f77b8f873d99a01c1c.js"></script>
   </main>
+  <script src="app/js/main.js"></script>
+  <script src="app/js/ajax.js"></script>
+
+  <script src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54e9d46555872d772f8ec6caa8330b060c036f31ece6d43336cb1cb41eb6fede.js"></script>
 </body>
 </html>

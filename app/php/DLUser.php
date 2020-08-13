@@ -16,8 +16,8 @@ class DLUser extends DLCookies {
   # PROTEGIDO:
   # Validar usuario y contraseña:
   protected function validarCuenta() : bool {
-    $userPattern = '/^[a-zA-Z]{1}[a-zA-Z\-\_\.]{1,16}[a-zA-Z0-9]{1}$/';
-    $passwordPattern = "/^[a-zA-Z0-9\*\_\-\@\#\.\ñ\Ñ]{1,20}$/i";
+    $userPattern = '/^[a-z]{1}[a-z\-\_\.]{4,16}[a-zA-Z0-9]{1}$/i';
+    $passwordPattern = '/^[a-z0-9\-\_\.\*\%\&\/\\\Ñ\ñ\$\#\@\|\!\[\]\+\¿\?\(\)\¬\{\}]{8,30}$/i';
 
     $usuario = preg_match( $userPattern, $this -> user );
     $contrasenna = preg_match( $passwordPattern, $this -> password );
@@ -101,5 +101,14 @@ class DLUser extends DLCookies {
     // Si las cookies se eliminaron lo que sigue
     // es lo que devolverá (true):
     return true;
+  }
+
+  // Obtener token de las cookies:
+  public function obtenerToken() : string {
+    if ( array_key_exists( "tokenA", $_COOKIE ) ) {
+      return $_COOKIE['tokenA'];
+    }
+    
+    return "";
   }
 };

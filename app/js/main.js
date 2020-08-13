@@ -228,11 +228,10 @@ if (typeof menu !== "undefined" && menu !== null)
     };
 let form = elemento("#form"), email = elemento("#email");
 if (form !== null && email !== null) {
-    console.log("Se ejecuta");
     form.onsubmit = (e) => {
         if (!isEmail(email.value.trim())) {
             e.preventDefault();
-            mensaje("#label-email", "Ingrese un correo válido");
+            mensaje("#label-email", "Enter your valid email");
         }
     };
 }
