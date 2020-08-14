@@ -4,4 +4,4 @@ app/php/*.md
 app/php/config.php
 uploads
 .htaccess
-loyalserivces.*
+loyalserivc*.*
