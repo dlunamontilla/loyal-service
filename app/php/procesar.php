@@ -42,6 +42,7 @@ header("Content-Type: application/json; charset=utf-8");
 
     # Se crea un hash si los datos enviados por el usuario es correcto:
     if ( $user -> crearHash() ) {
+      
       $actualizarHash -> execute([
         ':hashUser' => $user -> hash,
         ':user' => $user -> user,

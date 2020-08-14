@@ -69,14 +69,15 @@ class DLUser extends DLCookies {
 
     $this -> crear( "tokenA", [
       "content" => $this -> hash,
-      "duracion" => (int) 3600 * 24
+      "duracion" => (int) 3600 * 24,
+      
     ]);
 
     $this -> crear( "tokenB", [
       "content" => sha1( $hash ),
-      "duracion" => (int) 3600 * 24
+      "duracion" => (int) 3600 * 24,
     ]);
-    
+
     return (boolean) (
       array_key_exists( "tokenA", $_COOKIE ) ||
       array_key_exists( "tokenB", $_COOKIE))

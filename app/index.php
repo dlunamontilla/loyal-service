@@ -1,25 +1,4 @@
 <?php
-  if ( $_SERVER['SERVER_NAME'] !== "localhost" ) { ?>
-  <link rel="stylesheet" href="../vista/css/style.css">
-  <link rel="shortcut icon" href="../multimedia/imagen/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="../multimedia/imagen/favicon.png" type="image/png">
-  
-  <main class="">
-    <div class="portada flex--center" style="flex-wrap: wrap;">
-      <div class="width flex default" style="padding: 10px;">
-        <h2 class="width default">Estará disponible en el transcurso del día o en la tarde</h2>
-        <a href="../">Volvar a la página principal</a>
-      </div>
-
-      <div  id="logo" class="logotipo" data-src="../multimedia/imagen/loyal-services-logo-azul.svg"</div>
-    </div>
-  </main>
-
-  <script src="app/js/main.js"></script>
-<?php
-  exit;
-  }
-  
   include __DIR__ . "/php/index.php";
 
   $user = new DLUser();

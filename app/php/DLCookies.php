@@ -37,14 +37,12 @@ class DLCookies {
   protected $duracion = 1800;
   protected $ruta = "/";
   protected $dominio = "";
-  protected $seguro = "Lax";
-  protected $soloHTTP = false;
+  protected $seguro = FALSE;
+  protected $soloHTTP = true;
 
   public function __construct() {
     # Instrucciones...
-
     $this -> dominio = (string) @$_SERVER['SERVER_NAME'];
-    $this -> ruta =  (string) @$_SERVER['REQUEST_URI'];
   }
 
   /**
