@@ -353,7 +353,7 @@ if (typeof menu !== "undefined" && menu !== null)
 		}
 	}
 
-let form = elemento( "#form" ),
+let form = elemento( "#form-email" ),
 	email = elemento( "#email");
 
 if (form !== null && email !== null) {

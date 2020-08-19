@@ -55,3 +55,85 @@
 .loginAnimation {
   animation: 200ms linear login alternate 6;
 }
+
+// INDICADOR DE CARGA DE LA PÁGINA:
+/* Propiedades comunes del lienzo y la caja */
+.lienzo,
+.caja {
+  --diametro: 100px;
+  
+  width: var(--diametro);
+  height: var(--diametro);
+}
+
+/* Lienzo donde se ubica la circunferencia */
+.lienzo {
+  transform: rotateZ( -90deg );
+}
+
+/* Circunferencia */
+.cir {
+  fill: none;
+}
+
+/* Circunferencia con el borde fijo */
+.cir--fijo {
+  stroke: $color-secundario;
+  stroke-width: 5;
+}
+
+/* Circunferencia con el borde animado */
+.cir--completando {
+  stroke: $color-base;
+  stroke-width: 10;
+  
+  /* Matriz de guiones */
+  stroke-dasharray: 440;
+  stroke-dashoffset: 80;
+}
+
+/* Animación del trazo (stroke) */
+.giro-trazo {
+  animation: 2s ease giro-trazo infinite;
+}
+
+/* Animación de giro en intervalos de dos (02) segundos */
+.giro-intervalo {
+  animation: 2s ease giro-intervalo infinite;
+}
+
+
+/* Animación de giro constante*/
+.giro-constante {
+  animation: 1.5s linear giro-constante infinite;
+}
+
+/* Definición de animaciones utilizadas en 
+   en las clases anteriores */
+
+/* Desplazamiento de los guiones del trazo
+   de la circunferencia */
+@keyframes giro-trazo {
+  50% {
+    stroke-dashoffset: 440;
+  }  
+}
+
+/* Giro en intervalo. Se aplicará en el lienzo */
+@keyframes giro-intervalo {
+  0% {
+    transform: rotateZ( -449deg );
+  }
+  
+  50%, 100% {
+    transform: rotateZ( -90deg );
+  }
+}
+
+
+/* Animación para giro constante de 360 grados */
+@keyframes giro-constante {
+  from {
+    transform: rotateZ( -359deg );
+  }
+}

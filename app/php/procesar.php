@@ -228,3 +228,37 @@ header("Content-Type: application/json; charset=utf-8");
       header("Location: ../?about#actualizar-about");
     }
   }
+
+  $recibirCorreo = [
+    "email" => false,
+    "g-recaptcha-response" => true
+  ];
+
+  if ( $post -> validar( $recibirCorreo ) ) {
+    // Procesando datos del formulario de correo:
+    $response = $_POST['g-recaptcha-response'];
+    $email = $_POST['email'];
+
+    if ( reCAPTCHA( $response ) ) {
+      // Enviar correo a la base de datos si su formato es correcto:
+      if ( $validar -> email( $email ) ) {
+        $agregarCorreo -> execute([
+          ":email" => (string) $email
+        ]);
+
+        $cookie -> crear("email-enviado", [
+          "content" => "Thanks for subscribing",
+          "duracion" => (int) 5,
+          "ruta" => "/"
+        ]);
+      }
+    }else {
+      $cookie -> crear("email-no-enviado", [
+        "content" => "Solve the reCAPTCHA",
+        "duracion" => (int) 5,
+        "ruta" => "/"
+      ]);
+    }
+
+    header("Location: ../../#form-email");
+  }

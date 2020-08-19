@@ -102,7 +102,7 @@
         "affectsGlobalScope": true
       },
       "./app/js/main.ts": {
-        "version": "b8922999571363d72211ffbbe0c5862faf6d7fc3603392d01783063dc0fed714",
+        "version": "8cc7363220041776d526dd3ffe2238c8f8841e97bcf6043f818dafaecb216062",
         "signature": "3cf03ff3dad01e1e3fe6111d949912b12feb5141d3c14cef8ae6737aa489b031",
         "affectsGlobalScope": true
       }

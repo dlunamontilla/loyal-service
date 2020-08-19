@@ -32,5 +32,49 @@ if ( $get -> validar( $getAbout ) ) {
   $obtenerAbout -> execute();
   $about = $obtenerAbout -> fetch(PDO::FETCH_OBJ);
 
-  echo json_encode( $about );
+  echo json_encode( @$about );
+}
+
+// Obtener catálogos:
+$catalogs = [
+  "catalogs" => true
+];
+
+if ( $get -> validar( $catalogs ) ) {
+  $obtenerCatalogos -> execute();
+  $catalogos = $obtenerCatalogos -> fetchAll( PDO::FETCH_OBJ );
+  echo json_encode( @$catalogos );
+}
+
+// Obtener servicios:
+$services = [
+  "services" => true
+];
+
+if ( $get -> validar( $services ) ) {
+  $obtenerServicios -> execute();
+  $servicios = $obtenerServicios -> fetchAll( PDO::FETCH_OBJ );
+  echo json_encode( @$servicios );
+}
+
+// Obtener mensaje:
+$correoEnviado = [
+  "correoEnviado" => true
+];
+
+if ( $get -> validar( $correoEnviado ) ) {
+  echo json_encode([
+    "info" => (string) @$_COOKIE['email-enviado']
+  ]);
+}
+
+// Obtener mensaje:
+$correoNoEnviado = [
+  "correoNoEnviado" => true
+];
+
+if ( $get -> validar( $correoNoEnviado ) ) {
+  echo json_encode([
+    "info" => (string) @$_COOKIE['email-no-enviado']
+  ]);
 }

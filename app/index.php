@@ -16,7 +16,7 @@
   $obtenerHash -> execute([
     ":hashUser" => $user -> obtenerToken()
   ]);
-  
+
   // Verificando que la sesión se haya iniciado:
   $hashUser = $obtenerHash -> fetch( PDO::FETCH_OBJ );
   $hash = ( ! empty(@$hashUser -> hashUser) ) ? $hashUser -> hashUser : "";
@@ -148,8 +148,6 @@
 
         <!-- Módulo de servicios -->
         <section class="update" id="services">
-          <a href="./">&lt;&lt; Go Back</a>
-          <hr>
 
           <h2 class="title title--center title--uppercase title--base">Add & remove services</h2>
 
@@ -201,8 +199,6 @@
         
         <!-- Módulo Catálogos -->
         <section class="update" id="catalogs">
-          <a href="./">&lt;&lt; Go Back</a>
-          <hr>
 
           <h2 class="title title--center title--uppercase title--base">Add & remove catalogs</h2>
 
@@ -254,8 +250,6 @@
 
         <!-- Módulo About -->
         <section class="update" id="about">
-          <a href="./">&lt;&lt; Go Back</a>
-          <hr>
           <h2 class="title title--center title--uppercase title--base">Update About</h2>
 
           <div class="form form--content">
@@ -296,8 +290,6 @@
           
         <!-- Módulo de usuario -->
         <section class="update" id="users">
-          <a href="./">&lt;&lt; Go Back</a>
-          <hr>
 
           <h2 class="title title--center title--uppercase title--base">Update Password</h2>
 

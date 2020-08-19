@@ -226,7 +226,7 @@ if (typeof menu !== "undefined" && menu !== null)
                 });
         }
     };
-let form = elemento("#form"), email = elemento("#email");
+let form = elemento("#form-email"), email = elemento("#email");
 if (form !== null && email !== null) {
     form.onsubmit = (e) => {
         if (!isEmail(email.value.trim())) {

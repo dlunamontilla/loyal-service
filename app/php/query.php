@@ -39,8 +39,8 @@ $obtenerCalendario = $pdo -> prepare("SELECT * FROM calendar");
 
 # EMAIL:
 # Agregar correo electrónico:
-$agregarCorreo = $pdo -> prepare("INSERT INTO email VALUES(NULL, :email, NOW());");
+$agregarCorreo = $pdo -> prepare("INSERT INTO emails VALUES(NULL, :email, NOW());");
 
 # Obtener correo:
-$obtenerCorreo = $pdo -> prepare("SELECT * FROM emails");
+$obtenerCorreo = $pdo -> prepare("SELECT * FROM emails ORDER BY dateRegister DESC");
 ?>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-VE">
-<head>
+<head id="head">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Sitio Web para una empresa que presta servicios" />
@@ -9,11 +9,16 @@
 
   <link rel="icon" href="multimedia/imagen/favicon.png" type="image/png">
   <link rel="shortcut icon" href="multimedia/imagen/favicon.ico" type="image/x-icon">
-  
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="vista/css/style.css?v3">
   <script src="app/library/smoothscroll.js"></script>
+
+  <!-- Google -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+
   <template id="template-cards">
     <div class="cards">
       <div class="cards__item" data-href="#about">
@@ -24,7 +29,7 @@
         </div>
       </div>
 
-      <div class="cards__item">
+      <div class="cards__item" id="servicios">
         <div class="cards__img" data-src="multimedia/imagen/servicios.svg"></div>
         
         <div class="cards__text">
@@ -56,6 +61,50 @@
     <li class="menu__item"><a href="#catalogs" class="menu__enlace flex">Catalogs</a></li>
     <li class="menu__item"><a href="#about" class="menu__enlace flex">About</a></li>
     <li class="menu__item"><a href="#contact" class="menu__enlace flex">Contact</a></li>
+  </template>
+
+  <template id="animacion">
+    <div class="caja giro-constante" id="animacion-carga">
+      <svg viewBox="0 0 140 140" class="lienzo giro-intervalo">
+        <!-- Degradado de colores -->
+        <linearGradient id="gradiente" gradientTransform="rotate(319)">
+          <stop stop-color="#2873fe" offset="0%" />
+          <stop stop-color="#9e48c9" offset="30%" />
+        </linearGradient>
+    
+        <!-- Circunferencia con borde fijo-->
+        <circle class="cir cir--fijo" cx="70" cy="70" r="65" />
+        
+        <!-- Circunferencia con borde animado -->
+        <circle class="cir cir--completando giro-trazo" cx="70" cy="70" r="65" />
+      </svg>
+    </div>
+  </template>
+
+  <template id="template-calendar">
+    <div class="modal-calendar" id="modal-calendar">
+      <div class="modal-calendar__group-button">
+        <button data-action="salir" class="modal-calendar__salir">x</button>
+      </div>
+
+      <div class="modal-calendar__content">
+        <form action="app/ajax/" method="post" id="form-calendar">
+          
+          <label class="correo">
+            <span>Enter your email</span>
+            <input type="email" name="email" id="email">
+          </label>
+
+          <hr>
+          
+          <div id="mes" class="modal-calendar__mes"></div>
+
+          <!-- reCAPTCHA de Google -->
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+          <div class="g-recaptcha" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
+        </form>
+      </div>
+    </div>
   </template>
 
   <main id="app" class="min-height">
@@ -91,6 +140,8 @@
       <section id="catalogs" class="section section--cards">
         <div class="section__content" id="catalogs-content">
           <h2 class="title title--center title--large title--uppercase">Catalogs</h2>
+
+          <div class="grid-catalogs" id="grid-catalogs"></div>
         </div>
       </section>
 
@@ -164,7 +215,7 @@
             </div>
 
             <!-- Ir al calendario -->
-            <div id="calendar">
+            <div id="calendar" class="view-calendar">
               <a href="#view-calendar" class="calendar--enlace">
                 <div data-src="multimedia/imagen/calendario.svg"></div>
                 <p>Go to the calendar</p>
@@ -186,7 +237,7 @@
 
         <div class="section__item section__item--form">
           <div class="contact contact--form">
-            <form action="./?#" class="form" method="post" id="form">
+            <form action="./app/php/procesar.php" class="form" method="post" id="form-email">
               <label id="label-email">
                 <p class="text text--small-caps text--label">Subscribe and receive <br>notifications</p>
 
@@ -195,6 +246,10 @@
                   <button class="button button--primary button--circle content-input__item content-input__item--button" data-src="multimedia/imagen/angle-right.svg"></button>
                 </div>
               </label>
+
+              <br>
+               <!-- reCAPTCHA de Google -->
+               <div class="g-recaptcha" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
             </form>
           </div>
         </div>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(../css/roboto.css);
 ::-moz-focus-inner {
   border: 0;
@@ -769,6 +770,9 @@ pre, code {
   background-color: #19035b;
   background-image: url("../../multimedia/imagen/fotos/catalogos.jpeg");
 }
+.section--cards::after {
+  background-color: rgba(11, 1, 42, 0.7);
+}
 .section--about {
   background-image: url("../../multimedia/imagen/fotos/about.jpeg");
 }
@@ -783,7 +787,7 @@ pre, code {
 }
 @media screen and (min-width: 1100px) {
   .section--contact {
-    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-columns: 1.5fr repeat(3, 1fr);
   }
 }
 @media screen and (min-width: 740px) and (max-width: 1099px) {
@@ -1245,6 +1249,281 @@ pre, code {
   margin-top: 20px;
 }
 
+.grid-catalogs {
+  display: grid;
+  padding: 10px;
+  --columnas: 4;
+  --gap: 20px;
+  grid-gap: var(--gap);
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+.grid-catalogs img {
+  display: flex;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.grid-catalogs__item {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  overflow: hidden;
+  --padding: 10px;
+}
+.grid-catalogs__imagen {
+  position: relative;
+  padding-top: 56.25%;
+}
+.grid-catalogs__caption {
+  color: rgba(34, 22, 72, 0.9);
+  border-top: 1px solid white;
+}
+.grid-catalogs__caption:not(:empty) {
+  padding: var(--padding);
+}
+.grid-catalogs__caption:empty {
+  display: none;
+}
+
+#catalogs-content .title {
+  color: white;
+}
+
+.modal-foto {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(5, 1, 17, 0.91);
+  overflow: auto;
+  z-index: 100;
+}
+.modal-foto__salir {
+  margin-left: auto;
+  margin-right: 10px;
+  --margin: 10px;
+  margin-top: var(--margin);
+  margin-bottom: var(--margin);
+  --diametro: 40px;
+  height: var(--diametro);
+  width: var(--diametro);
+  background-image: none;
+  background-color: transparent;
+  transition: 300ms ease;
+  border: 0;
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 4px;
+}
+.modal-foto__salir:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+}
+.modal-foto__imagen {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.modal-foto__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+.modal-foto__caption {
+  padding: 20px;
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  max-width: 1200px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-services {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 100;
+}
+.modal-services .title {
+  width: calc(100% - 20px);
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  background-color: #f6f5f6;
+  border-left: 1px solid #e9e9e9;
+  border-top: 1px solid #e9e9e9;
+  border-right: 1px solid #e9e9e9;
+}
+.modal-services__content {
+  width: calc(100% - 20px);
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #e9e9e9;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  --gap: 10px;
+  grid-gap: var(--gap);
+  gap: var(--gap);
+}
+.modal-services__item {
+  border: 1px solid rgba(192, 192, 192, 0.3);
+  padding: 0 10px;
+}
+.modal-services__salir {
+  background-image: none;
+  background-color: transparent;
+  border: 0;
+  font-size: 1.4rem;
+  border-radius: 4px;
+  --diametro: 40px;
+  --separacion: 10px;
+  width: var(--diametro);
+  height: var(--diametro);
+  color: #19035b;
+  transition: 300ms ease;
+  margin-left: auto;
+  margin-top: var(--separacion);
+  margin-right: var(--separacion);
+  margin-bottom: var(--separacion);
+}
+.modal-services__salir:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  --color: #545456;
+  --fondo: #eeeeee;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--color);
+  background-color: var(--fondo);
+}
+.info:empty {
+  display: none;
+}
+.info--success {
+  --fondo: #deedde;
+  --color: #004d00;
+}
+.info--error {
+  --fondo: #ffe1e1;
+  --color: #bd0000;
+}
+
+.view-calendar {
+  background-color: transparent;
+  transition: 300ms ease;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 4px;
+}
+.view-calendar:hover {
+  background-color: rgba(25, 3, 91, 0.07);
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.view-calendar:active {
+  background-color: rgba(25, 3, 91, 0.1);
+  transition: none;
+}
+
+.modal-calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(230, 230, 230, 0.8);
+  z-index: 100;
+}
+.modal-calendar__group-button {
+  width: calc(100% - 20px);
+  margin: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+}
+.modal-calendar__content {
+  flex-grow: 1;
+  width: calc(100% - 20px);
+  max-width: 1200px;
+  padding: 10px;
+  background-color: white;
+  overflow: auto;
+  min-height: 100px;
+}
+.modal-calendar__mes {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: silver;
+}
+.modal-calendar__salir {
+  display: block;
+  --diametro: 40px;
+  width: var(--diametro);
+  height: var(--diametro);
+  background-image: none;
+  background-color: transparent;
+  transition: 300ms ease;
+  border: 0;
+  border-radius: 4px;
+  --separacion: 10px;
+  margin-left: auto;
+  margin-top: var(--separacion);
+  margin-right: var(--separacion);
+  margin-bottom: var(--separacion);
+  font-size: 1.3rem;
+  color: #f00000;
+}
+.modal-calendar__salir:hover {
+  background-color: rgba(240, 0, 0, 0.7);
+  color: white;
+}
+.modal-calendar__salir:active {
+  transition: none;
+  background-color: rgba(240, 0, 0, 0.9);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1297,6 +1576,78 @@ pre, code {
   animation: 200ms linear login alternate 6;
 }
 
+/* Propiedades comunes del lienzo y la caja */
+.lienzo,
+.caja {
+  --diametro: 100px;
+  width: var(--diametro);
+  height: var(--diametro);
+}
+
+/* Lienzo donde se ubica la circunferencia */
+.lienzo {
+  transform: rotateZ(-90deg);
+}
+
+/* Circunferencia */
+.cir {
+  fill: none;
+}
+
+/* Circunferencia con el borde fijo */
+.cir--fijo {
+  stroke: #87868a;
+  stroke-width: 5;
+}
+
+/* Circunferencia con el borde animado */
+.cir--completando {
+  stroke: #19035b;
+  stroke-width: 10;
+  /* Matriz de guiones */
+  stroke-dasharray: 440;
+  stroke-dashoffset: 80;
+}
+
+/* Animación del trazo (stroke) */
+.giro-trazo {
+  animation: 2s ease giro-trazo infinite;
+}
+
+/* Animación de giro en intervalos de dos (02) segundos */
+.giro-intervalo {
+  animation: 2s ease giro-intervalo infinite;
+}
+
+/* Animación de giro constante*/
+.giro-constante {
+  animation: 1.5s linear giro-constante infinite;
+}
+
+/* Definición de animaciones utilizadas en 
+   en las clases anteriores */
+/* Desplazamiento de los guiones del trazo
+   de la circunferencia */
+@keyframes giro-trazo {
+  50% {
+    stroke-dashoffset: 440;
+  }
+}
+/* Giro en intervalo. Se aplicará en el lienzo */
+@keyframes giro-intervalo {
+  0% {
+    transform: rotateZ(-449deg);
+  }
+  50%, 100% {
+    transform: rotateZ(-90deg);
+  }
+}
+/* Animación para giro constante de 360 grados */
+@keyframes giro-constante {
+  from {
+    transform: rotateZ(-359deg);
+  }
+}
 .color-base {
   --color: #19035b;
 }

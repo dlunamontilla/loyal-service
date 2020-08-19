@@ -17,4 +17,10 @@
     $validar = preg_match( $pattern, $password );
     return ( $validar ) ? true : false;
   }
+
+  public function email( string $email ) : bool {
+    $pattern = "/^[a-zA-Z0-9.!#$%&\'*+\/\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+    $validar = preg_match( $pattern, $email );
+    return ( $validar ) ? TRUE : FALSE;
+  }
  }
