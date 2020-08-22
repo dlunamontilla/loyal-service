@@ -35,14 +35,34 @@ class DLCalendario {
     return $dias;
   }
 
-  public function crear( int $mes, int $año ) : array {
+  protected function comprobar( int $dia, int $mes, $comprobar = [] ) {
+    $comprobar = $comprobar;
+
+    if ( count( $comprobar ) > 0 ) {
+      $comprobar = $comprobar;
+      foreach( $comprobar as $key => $value ) {
+        $fecha = (object) $value;
+        
+        if ( $dia === $fecha -> dia && $mes == $fecha -> mes && (int) date("Y") === (int) $fecha -> anno ) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  public function crear( int $mes, int $año, $comprobar = [] ) : array {
     $calendario = [];
     $dias = (int) $this -> dias( $mes, $año );
 
     for ( $dia = 1; $dia <= $dias; $dia++ ) {
       array_push( $calendario, [
         "dia" => (int) $dia,
-        "diaSemana" => (string) $this -> diaSemana( (int) $dia, (int) $mes, (int) $año )
+        "diaSemana" => (string) $this -> diaSemana( (int) $dia, (int) $mes, (int) $año ),
+        "mes" => (int) $mes,
+        "anno" => (int) $año,
+        "disponible" => $this -> comprobar( $dia, $mes, $comprobar )
       ]);
     }
 

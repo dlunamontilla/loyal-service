@@ -157,6 +157,18 @@
     margin-left: 10px;
     border: 1px solid rgba( white, 0.3 );
   }
+
+  &--eliminar {
+    background-color: darken( red, 5 );
+    color: white;
+    font-weight: bold;
+  }
+
+  &--archivar {
+    background-color: #f06600;
+    color: white;
+    font-weight: bold;
+  }
 }
 
 // Contenedor para las cajas de texto:
@@ -415,4 +427,32 @@
       font-size: 0.75rem;
     }
   }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  flex-wrap: wrap;
+
+  &__select {
+    background-image: none;
+    height: 30px;
+    border: 1px solid white;
+    box-shadow: 0 0 2px $color-base;
+    border-radius: 4px;
+    background-color: white;
+    color: $color-base;
+    appearance: none;
+  }
+}
+
+.calendar-admin {
+  background-color: rgba( $color-base, 0.05 );
+  border-radius: 10px;
+  padding: 10px;
+
+  width: $width;
+  max-width: $max-width;
+  margin: 20px auto;
 }

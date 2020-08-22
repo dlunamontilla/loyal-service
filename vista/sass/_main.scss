@@ -5,6 +5,37 @@
   &--between {
     justify-content: space-between;
   }
+
+  &--base {
+    align-items: end;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--vertical {
+    &-center {
+      align-items: center;
+    }
+  }
+
+  &__item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+  }
+
+  &--columns {
+    flex-direction: columns;
+    justify-content: flex-start !important;
+    align-items: center;
+    background-color: rgba(white, 0.5);
+    border-radius: 10px;
+  }
 }
 
 .text {
@@ -371,21 +402,24 @@
     --display: grid;
     --justify-content: initial;
 
-    @media screen and (min-width: 1100px) {
-      grid-template-columns: 1.5fr repeat(3, 1fr);
-    }
+    border-top: 1px solid rgba($color-base, 0.1);
 
-    @media screen and (min-width: 740px) and (max-width: 1099px) {
-      grid-template-columns: 1.5fr repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    // @media screen and (min-width: 1100px) {
+    //   grid-template-columns: 1.5fr repeat(3, 1fr);
+    // }
 
-    @media screen and (min-width: 500px) and (max-width: 739px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    // @media screen and (min-width: 740px) and (max-width: 1099px) {
+    //   grid-template-columns: 1.5fr repeat(2, 1fr);
+    // }
 
-    @media screen and (max-width: 499px) {
-      grid-template-columns: 1fr;
-    }
+    // @media screen and (min-width: 500px) and (max-width: 739px) {
+    //   grid-template-columns: repeat(2, 1fr);
+    // }
+
+    // @media screen and (max-width: 499px) {
+    //   grid-template-columns: 1fr;
+    // }
 
     min-height: 200px;
     padding: 0;
@@ -400,6 +434,23 @@
     padding-bottom: var(--padding);
     padding-left: 10px;
     padding-right: 10px;
+
+    border-bottom: 1px solid rgba($color-base, 0.1);
+
+    &:nth-of-type(2n) {
+      background-color: rgba(white, 0.5);
+    }
+
+    &:not(:last-of-type) {
+      border-right: 1px solid rgba($color-base, 0.1);
+    }
+
+    .g-recaptcha {
+      transform: scale(0.9);
+      transform-origin: 0 center;
+      padding: 0;
+
+    }
 
     &--fondo {
       display: flex;
@@ -820,10 +871,17 @@
 }
 
 .grid {
-  display: grid;
+  --gap: 10px;
 
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 10px;
+
+  gap: var(--gap);
+  grid-gap: var(--gap);
+
+  &--gap {
+    --gap: 30px;
+  }
 
   &--default {
     margin: 40px auto;
@@ -1073,7 +1131,7 @@
   z-index: 100;
 
   $border-color: lighten( $color-secundario, 38 );
-
+  
   .title {
     width: $width;
     max-width: $max-width;
@@ -1165,8 +1223,8 @@
   &--success {
     $color: #008000;
 
-    --fondo: #{desaturate(lighten( $color, 65 ), 70)};
-    --color: #{darken($color, 10)};
+    --fondo: #{rgba( $color, 0.1 )};
+    --color: #{darken($color, 5)};
   }
 
   &--error {
@@ -1174,6 +1232,13 @@
 
     --fondo: #{lighten( $color, 47 )};
     --color: #{darken($color, 10)};
+  }
+
+  &--warning {
+    $color: #f06600;
+
+    --fondo: #{rgba($color, 0.035)};
+    --color: #{darken( $color, 3 )};
   }
 }
 
@@ -1198,41 +1263,55 @@
 }
 
 .modal-calendar {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
   position: fixed;
   margin: auto;
   left: 0; right: 0;
   top: 0; bottom: 0;
-
-  background-color: rgba( darken( white, 10 ), 0.8 );
+  overflow: auto;
+  background-color: rgba( darken(desaturate($color-base, 40), 10), 0.9 );
 
   z-index: 100;
 
-  &__group-button {
-    width: $width;
-    margin: 0;
-    flex-grow: 0;
-    flex-shrink: 1;
-  }
+  &__item {
 
-  &__content {
-    flex-grow: 1;
-    width: $width;
-    max-width: $max-width;
-    padding: 10px;
+    &--content {
+      --padding: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: $width;
+      max-width: $max-width;
+      padding-left: var(--padding);
+      padding-top: var(--padding);
+      padding-right: var(--padding);
+      padding-bottom: calc( var(--padding) * 2.9 );
+      background-color: lighten( $color-secundario, 40 );
+      border: 1px solid white;
+      box-shadow: 0 0 2px $color-secundario;
+      border-radius: 3px;
 
-    background-color: white;
-    overflow: auto;
-    min-height: 100px;
+      margin-top: 68px;
+    }
+
+    &--group-button {
+      position: fixed;
+      margin: auto;
+      left: 0; right: 0;
+      top: 0; bottom: auto;
+
+      background-color: rgba( black, 0.3 );
+    }
   }
 
   &__mes {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color:silver;
+    --diametro: 80px;
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( var(--diametro), 1fr ) );
+    --gap: 1px;
+
+    gap: var(--gap);
+    grid-gap: var(--gap);
   }
 
   &__salir {
@@ -1261,7 +1340,7 @@
       size: 1.3rem;
     }
 
-    color: $color-salir;
+    color: white;
 
     &:hover {
       background-color: rgba( $color-salir, 0.7 );
@@ -1272,5 +1351,194 @@
       transition: none;
       background-color: rgba( $color-salir, 0.9 );
     }
+  }
+}
+
+// Días del calendario:
+.dias {
+  height: var(--diametro);
+  background-color: lighten( $color-secundario, 43 );
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms ease;
+  cursor: pointer;
+  border: 1px solid white;
+  box-shadow: 0 0 2px rgba( $color-base, 0.1 );
+  background-image: linear-gradient(to bottom, rgba( $color-base, 0.05 ), transparent );
+
+  &--seleccionado.dias {
+    background-color: $color-base;
+    color: white;
+
+    &:hover {
+      transition: none;
+      background-color: lighten( $color-base, 10 );
+    }
+    
+    &:active {
+      background-color: lighten( $color-base, 15 );
+    }
+
+    .dias__semana,
+    .dias__item {
+      color: white;
+    }
+  }
+
+  &--actual.dias {
+    background-color: rgba( $color-base, 0.6);
+    color: white;
+
+    .dias__item,
+    .dias__semana {
+      color: inherit;
+    }
+
+    &:hover {
+      transition: 300ms ease;
+      background-color: $color-base;
+    }
+  }
+
+  &--anteriores {
+    opacity: 0.5;
+    cursor: default;
+
+    .dias__item,
+    .dias__semana {
+      color: $color-secundario;
+    }
+  }
+
+  &--reservados {
+    $color: red;
+    border: 1px solid $color;
+    color: $color;
+    background-color: rgba( $color, 0.1 );
+    cursor: default;
+    
+    &:hover {
+      background-color: rgba( $color, 0.15 );
+    }
+
+    &::before {
+      content: "Reserved";
+      display: flex;
+      height: 15px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      font-size: 0.7rem;
+      line-height: 0;
+      background-color: darken($color, 20);
+      color: white;
+      font-weight: bold;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      z-index: 1;
+    }
+
+    .dias__semana,
+    .dias__item {
+      color: darken( red, 10 );
+    }
+  }
+
+  &:hover {
+    transition: none;
+    background-color: lighten( $color-base, 75 );
+  }
+
+  &__item {
+    width: 100%;
+    text-align: center;
+    color: darken( $color-secundario, 20 );
+  }
+
+  &__semana {
+    font: {
+      size: 1.3rem;
+    }
+
+    color: desaturate($color-base, 40);
+
+    &--sabado {
+      color: #f06600;
+    }
+
+    &--domingo {
+      color: red;
+    }
+  }
+}
+
+#informar-reserva {
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.lista {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.fondo {
+  background-color: var(--fondo);
+
+  &--base-alfa {
+    --fondo: #{rgba($color-base, 0.1)};
+  }
+}
+
+.email-title {
+  width: 100%;
+}
+
+// Correo electrónico:
+.correo {
+  max-width: 100%;
+
+  @media screen and (max-width: 750px ) {
+    background-color: rgba(white, 0.6);
+    padding: 20px;
+    border: 1px solid white;
+
+    [type="text"],
+    [type="email"] {
+      transition: 300ms;
+      width: 100%;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      &:focus {
+        border: 1px solid $color-base;
+      }
+    }
+
+    span {
+      display: block;
+      margin-bottom: 2px;
+
+      &:after {
+        content: ":";
+      }
+    }
+  }
+
+  @media screen and (max-width: 470px) {
+    margin-top: 10px;
   }
 }

@@ -1,25 +1,192 @@
+const agregarCero = (numero) => {
+  if (typeof numero !== "number")
+    return;
+
+  return (numero < 10) ? `0${numero}` : `${numero}`;
+};
+
+// Obtener Fecha:
+var obtenerFecha = function obtenerFecha() {
+  const fecha = new Date();
+
+  return {
+    dia: fecha.getDate(),
+    mes: fecha.getMonth() + 1,
+    anno: fecha.getFullYear()
+  }
+};
+
+// Informar al usuario sobre las acciones realizadas:
+var informar = function informar(_dia, _info, opciones) {
+  if (typeof _dia === "undefined" || typeof _info === "undefined")
+    return;
+
+  if (typeof _dia.dataset.dia === "undefined")
+    return;
+
+  if (_info !== null) {
+    if (typeof opciones.tipo !== "undefined")
+      _info.setAttribute("class", `info info--${opciones.tipo}`);
+
+    if (typeof opciones.mensaje !== "undefined")
+      _info.textContent = opciones.mensaje;
+  }
+};
+
+var seleccionarMes = function seleccionarMes(_mes) {
+  if (typeof _mes === "undefined")
+    return;
+
+  // Instanciar la clase Date():
+  let fecha = new Date();
+
+  const opciones = [];
+  const nodoOpciones = _mes.querySelectorAll("option");
+
+  nodoOpciones.forEach(opcion => {
+    opciones.push(opcion);
+  });
+
+  let mesActual = obtenerFecha().mes;
+
+  for (let opcion of opciones) {
+    if (opcion.value == mesActual) {
+      opcion.selected = true;
+    }
+  }
+};
+
+var enviarFormulario = function enviarFormulario(_ruta, _form) {
+  if (typeof _ruta === "undefined" || typeof _form === "undefined")
+    return;
+
+  const form = elemento(_form);
+
+  if (form === null)
+    return;
+
+  var formData = new FormData();
+
+  for (let elemento of form) {
+    let incluir = elemento.getAttribute("data-include");
+    let google = elemento.getAttribute("name") === "g-recaptcha-response";
+
+    if (incluir !== null || google) {
+      formData.append(`${elemento.getAttribute("name")}`, `${elemento.value}`);
+    }
+  }
+
+  fetch(_ruta, {
+    method: 'POST',
+    body: formData
+  })
+    .then(function (respuesta) {
+      return respuesta.json();
+    })
+    .then(function (json) {
+      // console.log("json =>", json);
+
+      let informarReserva = elemento("#informar-reserva");
+
+      console.log( "informar =>", informarReserva );
+
+      if ( informarReserva !== null ) {
+        informarReserva.textContent = json.info;
+
+        if ( json.status === true ) {
+          informarReserva.setAttribute("class", "info info--success");
+        }else {
+          informarReserva.setAttribute("class", "info info--warning");
+        }
+      }
+    })
+    .catch(function(error) {
+      console.log( error );
+    });
+};
+
+var marcarDia = function marcarSeleccion(_elementos, opciones) {
+  if (typeof _elementos === "undefined")
+    return;
+
+  if (typeof _elementos.length === "undefined" || _elementos.length < 1)
+    return;
+
+  const nodos = [];
+
+  for (let item of _elementos) {
+    nodos.push(item);
+  }
+
+  if (typeof opciones.clase !== "undefined") {
+    for (let nodo of nodos) {
+      if (typeof nodo.classList !== "undefined")
+        nodo.classList.remove(opciones.clase);
+    }
+
+    if (typeof opciones.dia !== "undefined") {
+      let dia = parseInt(opciones.dia) - 1;
+
+      if (typeof nodos[dia].classList !== "undefined")
+        nodos[dia].classList.add(opciones.clase);
+    }
+  }
+};
+
+var formatearFecha = function formatearFecha( fecha ) {
+  if ( typeof fecha === "undefined" )
+    return;
+
+  // meses
+  const meses = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  // Elementos Fechas:
+  let _elementos = fecha.split("-");
+
+  let anno = _elementos[0],
+    mes = _elementos[1],
+    dia = _elementos[2];
+  
+  mes--;
+
+  return `${meses[mes]} ${dia}, ${anno}`;
+}
+
 // Calendario:
 const calendario = (_ruta, _main) => {
   if (typeof _ruta !== "string" || typeof _main !== "string")
     return;
 
-  const main = elemento( _main );
-  if ( main === null )
+  const main = elemento(_main);
+  if (main === null)
     return;
 
   // Obtener datos de la plantilla si existe:
   const plantilla = elemento("#template-calendar");
-  if ( plantilla === null )
+  if (plantilla === null)
     return;
 
   // Imcorporar elementos:
   const modalCalendar = importNode(plantilla).content;
 
   // Observar cambios en el DOM:
-  var observar = new MutationObserver(function(mutaciones) {
-    mutaciones.forEach(function(mutacion) {
-      if ( mutacion.type === "childList" )
-        completarCalendario( _ruta );
+  var observar = new MutationObserver(function (mutaciones) {
+    mutaciones.forEach(function (mutacion) {
+      if (mutacion.type === "childList")
+        completarCalendario(_ruta);
     });
   });
 
@@ -29,63 +196,208 @@ const calendario = (_ruta, _main) => {
     characterData: true
   };
 
-  observar.observe( main, config );
-  main.append( modalCalendar );
+  observar.observe(main, config);
+  main.append(modalCalendar);
 
   // Completar calendario:
-  const completarCalendario = ( ruta ) => {
-    const calendario = main.querySelector( "#modal-calendar" );
-    if ( calendario === null )
+  const completarCalendario = (ruta) => {
+    const calendario = main.querySelector("#modal-calendar");
+    if (calendario === null)
       return;
-
-    // Cerrar la ventana calendario:
-    calendario.onclick = function(e) {
-      let salir = e.target;
-
-      if ( typeof salir.dataset.action === "undefined" )
-        return;
-
-      if ( salir.dataset.action === "salir" ) {
-        if ( typeof this.remove === "function" )
-          this.remove();
-      }
-    };
-
-    // Crear elementos:
-    const dias = document.createElement( "div" ),
-      diasItem = document.createElement( "div" ),
-      semanaItem = document.createElement( "div" );
-
-    // Establecer atributos:
-    dias.setAttribute("class", "dias dias--content");
-    diasItem.setAttribute("class", "dias__item");
-    semanaItem.setAttribute("class", "dia__semana");
 
     // Obtener el contenedor de los días:
     const mes = elemento("#mes");
+    const meses = elemento("#meses");
 
-    // Leer los datos del servidor:
-    fetch(ruta)
-      .then(function(respuesta) {
-        return respuesta.json();
-      })
-      .then(function( data ) {
-        if ( mes === null )
+    // Crear elementos:
+    let dias = document.createElement("div"),
+      diasItem = document.createElement("div"),
+      semanaItem = document.createElement("div");
+
+    // Establecer atributos:
+    dias.setAttribute("class", "dias");
+    diasItem.setAttribute("class", "dias__item");
+    semanaItem.setAttribute("class", "dias__semana");
+
+    // Obtener días en función del mes seleccionado:
+    const obtenerDias = (_ruta) => {
+      if (typeof _ruta === "undefined")
+        return;
+
+      // Leer los datos del servidor:
+      fetch(_ruta)
+        .then(function (respuesta) {
+          return respuesta.json();
+        })
+        .then(function (data) {
+          if (mes === null)
+            return;
+
+          let nDias, nDiasItem, nSemanaItem;
+
+          mes.innerHTML = "";
+          for (let item of data) {
+            nDias = importNode(dias);
+            nDiasItem = importNode(diasItem);
+            nSemanaItem = importNode(semanaItem);
+
+            nDias.setAttribute("data-dia", item.dia);
+            nDiasItem.textContent = item.dia;
+            nSemanaItem.textContent = item.diaSemana;
+
+            if (item.diaSemana === "Sat") {
+              nSemanaItem.classList.add("dias__semana--sabado");
+            }
+
+            if (item.diaSemana === "Sun") {
+              nSemanaItem.classList.add("dias__semana--domingo");
+            }
+
+            // Seleccionar el día actual:
+            if (item.mes === obtenerFecha().mes && item.dia === obtenerFecha().dia) {
+              nDias.classList.add("dias--actual");
+            }
+
+            // Marcar los días anteriores a la fecha actual:
+            if (
+              (item.mes === obtenerFecha().mes && item.dia < obtenerFecha().dia) ||
+              item.mes < obtenerFecha().mes
+            ) {
+              nDias.classList.add("dias--anteriores");
+            }
+
+            // Marcar los días reservados:
+            if (!item.disponible) {
+              nDias.classList.remove("dias--anteriores");
+              nDias.classList.add("dias--reservados");
+
+              nDias.setAttribute("title", "Reserved Day");
+            }
+
+            nDias.append(nSemanaItem, nDiasItem);
+
+            mes.append(nDias);
+          }
+        });
+    }
+
+    obtenerDias(ruta);
+
+    // Seleccionar un mes del calendario:
+    if (meses !== null && mes !== null) {
+      seleccionarMes(meses);
+
+      meses.onchange = function () {
+        obtenerDias(`./app/ajax/?calendario&mes=${this.value}`);
+      }
+    }
+
+    const fechaSeleccionada = elemento("#fechaSeleccionada"),
+      formCalendario = elemento("#form-calendar");
+
+    if (formCalendario !== null)
+      formCalendario.onsubmit = function (e) {
+        e.preventDefault();
+
+        if (fechaSeleccionada.value === "") {
+          alert("Debes seleccionar una fecha antes de continuar");
+          return;
+        }
+
+        let confirmar = confirm(`Do you want to save the date: ${formatearFecha( fechaSeleccionada.value )}?`);
+        if (confirmar) {
+          enviarFormulario("app/ajax/", "#form-calendar");
+        }
+      };
+
+    // Cerrar la ventana calendario:
+    calendario.onclick = function (e) {
+      let salir = e.target;
+
+      if (typeof salir.dataset.action !== "undefined") {
+        const body = elemento("body");
+
+        // Remover el atributo style al cerrar la ventana modal:
+        if (body !== null) {
+          body.removeAttribute("style");
+        }
+
+        // Remover la ventana modal al presionar el botón 
+        // de cerrar:
+        this.remove();
+      }
+
+      // Valor por defecto del elemento día:
+      let dia = null;
+
+      if (
+        e.target.classList.contains("dias__item") ||
+        e.target.classList.contains("dias__semana")
+      ) {
+        dia = e.target.parentNode;
+      }
+
+      if (typeof e.target.dataset.dia !== "undefined") {
+        dia = e.target;
+      }
+
+      // Cuando el usuario seleccione una fecha se marcará esa fecha en el input hidden
+      if (dia !== null) {
+        if (meses === null)
           return;
 
-        for ( let item of data ) {
-          let nDias = importNode( dias ),
-            nDiasItem = importNode( diasItem ),
-            nSemanaItem = importNode( semanaItem );
+        // Preparando formato de fecha para enviarlas al servidor:
+        let fdia = agregarCero(parseInt(dia.dataset.dia)),
+          fmes = agregarCero(parseInt(meses.value)),
+          anno = obtenerFecha().anno;
 
-          nDiasItem.textContent = item.dia;
-          nSemanaItem.textContent = item.diaSemana;
-          nDias.append( nDiasItem, nSemanaItem );
+        // Elemento para informar al usuario del tipo de selección que ha hecho:
+        let info = elemento("#informacion");
 
-          if ( item.dia <= 10 )
-            mes.append( nDias );
+        // Informar al usuario:
+        if (dia.classList.contains("dias--anteriores"))
+          informar(dia, info, {
+            tipo: "warning",
+            mensaje: "Choose a date greater than the current date"
+          });
+
+        if (dia.classList.contains("dias--reservados"))
+          informar(dia, info, {
+            tipo: "warning",
+            mensaje: "Reserved by another user"
+          });
+
+        if (dia.classList.contains("dias--actual"))
+          informar(dia, info, {
+            tipo: "warning",
+            mensaje: "This day cannot be reserved"
+          })
+
+        if (
+          !dia.classList.contains("dias--anteriores") &&
+          !dia.classList.contains("dias--reservados") &&
+          !dia.classList.contains("dias--actual")
+        ) {
+          informar(dia, info, {
+            tipo: "success",
+            mensaje: "Valid date selected"
+          });
+
+          marcarDia(mes.childNodes, {
+            dia: dia.dataset.dia,
+            clase: "dias--seleccionado"
+          });
+
+          // Obteniendo el elemento input hidden para agregarle información
+          // de la fecha seleccionada por el usuario para su posterior envío al
+          // servidor:
+          if (fechaSeleccionada !== null)
+            fechaSeleccionada.setAttribute("value", `${anno}-${fmes}-${fdia}`);
         }
-      })
+      }
+
+    };
+
   }
 };
 
@@ -371,14 +683,19 @@ services("app/ajax/?services", "#servicios", "#app");
 
 
 const calendar = elemento("#calendar");
-if ( calendar !== null )
-  calendar.onclick = function() {
-    calendario( "app/ajax/?calendario", "#app" );
+if (calendar !== null)
+  calendar.onclick = function () {
+    const body = elemento("body");
+    if (body !== null) {
+      body.style.overflow = "hidden";
+    }
+
+    calendario("app/ajax/?calendario", "#app");
   }
 
 
 // Lectura de mensaje:
-const infoEnvio = ( ruta, selector, tipo ) => {
+const infoEnvio = (ruta, selector, tipo) => {
   if (
     typeof ruta === "undefined" ||
     typeof selector === "undefined" ||
@@ -387,34 +704,34 @@ const infoEnvio = ( ruta, selector, tipo ) => {
     return;
   }
 
-  const label = elemento( selector );
-  const success = document.createElement( "div" );
-  
+  const label = elemento(selector);
+  const success = document.createElement("div");
+
   success.setAttribute("class", `info info--${tipo} desplegar`);
 
-  if ( label === null )
+  if (label === null)
     return;
 
   fetch(ruta)
-  .then(function (respuesta) {
-    return respuesta.json();
-  })
-  .then(function ( data ) {
-    if ( data.info.trim().length > 3 )
-      success.textContent = data.info;
-    
-    label.append( success );
-    
-    setTimeout(function() {
-      success.classList.replace( "desplegar", "plegar" );
-      success.onanimationend = function() {
-        if ( typeof this.remove === "function" )
-          this.remove();
-      }
-    }, 10 * 1000);
-  })
+    .then(function (respuesta) {
+      return respuesta.json();
+    })
+    .then(function (data) {
+      if (data.info.trim().length > 3)
+        success.textContent = data.info;
+
+      label.append(success);
+
+      setTimeout(function () {
+        success.classList.replace("desplegar", "plegar");
+        success.onanimationend = function () {
+          if (typeof this.remove === "function")
+            this.remove();
+        }
+      }, 10 * 1000);
+    })
 };
 
 // Probar:
-infoEnvio( "app/ajax/?correoEnviado", "#label-email", "success" );
-infoEnvio( "app/ajax/?correoNoEnviado", "#label-email", "error" );
+infoEnvio("app/ajax/?correoEnviado", "#label-email", "success");
+infoEnvio("app/ajax/?correoNoEnviado", "#label-email", "error");

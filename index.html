@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es-VE">
+<html lang="en-CA">
+
 <head id="head">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +18,14 @@
   <!-- Google -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
 <body>
 
   <template id="template-cards">
     <div class="cards">
       <div class="cards__item" data-href="#about">
         <div class="cards__img" data-src="multimedia/imagen/mision.svg"></div>
-        
+
         <div class="cards__text">
           <span class="cards__title">Mission</span>
         </div>
@@ -31,7 +33,7 @@
 
       <div class="cards__item" id="servicios">
         <div class="cards__img" data-src="multimedia/imagen/servicios.svg"></div>
-        
+
         <div class="cards__text">
           <span class="cards__title">Our Services</span>
         </div>
@@ -39,7 +41,7 @@
 
       <div class="cards__item" data-href="#contact">
         <div class="cards__img" data-src="multimedia/imagen/phone.svg"></div>
-        
+
         <div class="cards__text">
           <span class="cards__title">Contacts</span>
         </div>
@@ -71,10 +73,10 @@
           <stop stop-color="#2873fe" offset="0%" />
           <stop stop-color="#9e48c9" offset="30%" />
         </linearGradient>
-    
+
         <!-- Circunferencia con borde fijo-->
         <circle class="cir cir--fijo" cx="70" cy="70" r="65" />
-        
+
         <!-- Circunferencia con borde animado -->
         <circle class="cir cir--completando giro-trazo" cx="70" cy="70" r="65" />
       </svg>
@@ -83,25 +85,53 @@
 
   <template id="template-calendar">
     <div class="modal-calendar" id="modal-calendar">
-      <div class="modal-calendar__group-button">
+      <div class="modal-calendar__item modal-calendar__item--group-button">
         <button data-action="salir" class="modal-calendar__salir">x</button>
       </div>
 
-      <div class="modal-calendar__content">
+      <div class="modal-calendar__item modal-calendar__item--content">
         <form action="app/ajax/" method="post" id="form-calendar">
-          
-          <label class="correo">
-            <span>Enter your email</span>
-            <input type="email" name="email" id="email">
-          </label>
+          <input type="hidden" name="fechaSeleccionada" id="fechaSeleccionada" data-include="">
+
+          <div class="flex controls">
+            <label for="meses" data-include="false">
+              <select name="meses" id="meses" class="controls__select">
+                <span>Seleccione un mes</span>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </label>
+
+            <label class="correo">
+              <span class="color-base color-base--frontal">Enter your email</span>
+              <input type="email" name="email" id="email" class="input input--text" autocomplete="off" maxlength="70" placeholder="correo@example.com" data-include="">
+            </label>
+
+          </div>
 
           <hr>
-          
+
+          <div class="info" id="informacion">Select a day:</div>
           <div id="mes" class="modal-calendar__mes"></div>
 
           <!-- reCAPTCHA de Google -->
           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-          <div class="g-recaptcha" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
+          
+          <div class="fondo flex flex--wrap">
+            <div class="g-recaptcha flex__item" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
+            <div id="informar-reserva"></div>
+            <button type="submit" class="button button--primary button--right">Reserve</button>
+          </div>
         </form>
       </div>
     </div>
@@ -115,7 +145,7 @@
           <a href="#home" class="logo logo__enlace">
             <div class="logo logo--horizontal" data-src="multimedia/imagen/loyal-services-texto-grisaceo.svg"></div>
           </a>
-          
+
           <button id="menu-button" class="menu-button">
             <span data-src="multimedia/imagen/bars.svg"></span>
             <span>Menu</span>
@@ -128,8 +158,10 @@
 
     <div class="content">
       <section id="home" class="portada">
-        <div id="logotipo" class="portada__item portada__item--left" data-src="multimedia/imagen/loyal-services-logo-azul.svg"></div>
-        <div class="portada__item portada__item--right" data-src="multimedia/imagen/isotipo-mitad-derecha-sin-fondo.svg"></div>
+        <div id="logotipo" class="portada__item portada__item--left"
+          data-src="multimedia/imagen/loyal-services-logo-azul.svg"></div>
+        <div class="portada__item portada__item--right"
+          data-src="multimedia/imagen/isotipo-mitad-derecha-sin-fondo.svg"></div>
       </section>
 
       <!-- Área de servicios -->
@@ -150,16 +182,15 @@
           <h2 class="title title--center title--large">About</h2>
 
           <!-- Misión -->
-          <div class="grid grid--column-2 max-width max-width--1 max-width--center">
-            <div class="grid__item grid__item--about">
-              <div class="about about--title">
-                Mission
-              </div>
+          <div class="grid grid--gap grid--column-2 max-width max-width--1 max-width--center">
+            <div class="flex flex--columns grid__item grid__item--about">
+              <div class="about about--title">Mission</div>
+
               <div class="grid__caption" id="get-mission"></div>
             </div>
 
             <!-- Visión -->
-            <div class="grid__item grid__item--about">
+            <div class="flex flex--columns grid__item grid__item--about">
               <div class="about about--title">
                 Vision
               </div>
@@ -187,7 +218,8 @@
               <div class="whatsapp">
                 <p>WhatsApp:</p>
                 <p class="whatsapp__parrafo">
-                  <a class="whatsapp__enlace social-icon social-icon--whatsapp" href="https://api.whatsapp.com/send?phone=16477004965&text=Mensaje%20de%20prueba" target="_blank">
+                  <a class="whatsapp__enlace social-icon social-icon--whatsapp"
+                    href="https://api.whatsapp.com/send?phone=16477004965&text=Mensaje%20de%20prueba" target="_blank">
                     <span data-src="multimedia/imagen/whatsapp.svg"></span>
                     +1 647 700 4965
                   </a>
@@ -242,14 +274,17 @@
                 <p class="text text--small-caps text--label">Subscribe and receive <br>notifications</p>
 
                 <div class="content-input">
-                  <input type="text" name="email" id="email" class="input input--text content-input__item content-input__item--text" placeholder="Enter your email" autocomplete="off">
-                  <button class="button button--primary button--circle content-input__item content-input__item--button" data-src="multimedia/imagen/angle-right.svg"></button>
+                  <input type="text" name="email" id="email"
+                    class="input input--text content-input__item content-input__item--text"
+                    placeholder="Enter your email" autocomplete="off">
+                  <button class="button button--primary button--circle content-input__item content-input__item--button"
+                    data-src="multimedia/imagen/angle-right.svg"></button>
                 </div>
               </label>
 
               <br>
-               <!-- reCAPTCHA de Google -->
-               <div class="g-recaptcha" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
+              <!-- reCAPTCHA de Google -->
+              <div class="g-recaptcha" data-sitekey="6LcEs8AZAAAAAK-W6DdpNO4doqXWTU1G3Nx0OuWr"></div>
             </form>
           </div>
         </div>
@@ -259,6 +294,8 @@
   <script src="app/js/main.js"></script>
   <script src="app/js/ajax.js"></script>
 
-  <script src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54e9d46555872d772f8ec6caa8330b060c036f31ece6d43336cb1cb41eb6fede.js"></script>
+  <script
+    src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54e9d46555872d772f8ec6caa8330b060c036f31ece6d43336cb1cb41eb6fede.js"></script>
 </body>
+
 </html>

@@ -180,3 +180,41 @@ pre, code {
 .block {
   display: block;
 }
+
+.padding {
+  --padding: 10px;
+
+  &--right {
+    padding-right: var(--padding);
+  }
+
+  &--left {
+    padding-left: var(--padding);
+  }
+
+  &--top {
+    padding-top: var(--padding);
+  }
+
+  &--bottom {
+    padding-bottom: var(--padding);
+  }
+
+  &--horizontal {
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+  }
+
+  &--vertical {
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+  }
+
+  &--all {
+    padding: var(--padding);
+  }
+}
+
+.margin {
+  margin: 0;
+}

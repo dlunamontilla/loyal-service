@@ -262,3 +262,31 @@ header("Content-Type: application/json; charset=utf-8");
 
     header("Location: ../../#form-email");
   }
+
+
+  // Procesar calendario:
+  $archivarCalendario = [
+    "archivarFecha" => false
+  ];
+
+  if ( $post -> validar( $archivarCalendario) ) {
+    $actualizarCalendario -> execute([
+      ":id" => (int) $_POST['archivarFecha']
+    ]);
+
+    header("Location: ../?calendar#modCalendario");
+  }
+
+  // Procesar calendario:
+  $eliminarReserva = [
+    "eliminarFecha" => false
+  ];
+
+  if ( $post -> validar( $eliminarReserva) ) {
+    echo json_encode( $eliminarCalendario );
+    $eliminarCalendario -> execute([
+      ":id" => (int) $_POST['eliminarFecha']
+    ]);
+
+    header("Location: ../?calendar#modCalendario");
+  }

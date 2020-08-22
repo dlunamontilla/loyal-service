@@ -34,13 +34,22 @@
   $obtenerAbout -> execute();
   $about = $obtenerAbout -> fetch( PDO::FETCH_OBJ );
 
+  // Obtener calendario:
+  $obtenerCalendario -> execute();
+  $calendarioData = $obtenerCalendario -> fetchAll( PDO::FETCH_ASSOC );
+  
+  // Obtener correos electrónicos:
+  $obtenerCorreo -> execute();
+  $emailData = $obtenerCorreo -> fetchAll( PDO::FETCH_ASSOC );
+
   // Validación de los módulos:
   $modServices = ["services" => true];
   $modCatalogs = ["catalogs" => true];
   $modAbout = ["about" => true];
   $modUser = ["user" => true];
   $home = count($_GET) === 0;
-
+  $modCalendar = ["calendar" => true];
+  $modEmail = ["email" => true];
 ?>
 <!DOCTYPE html>
 <html lang="es-VE">
@@ -73,11 +82,13 @@
           <div class="form-content">
             <form action="php/procesar.php" method="post" class="form-login" id="form-login">
               <label class="label label--login">
-                <input type="text" name="user" id="user" autocomplete="off" class="input input--login" placeholder="User" required="" />
+                <input type="text" name="user" id="user" autocomplete="off" class="input input--login"
+                  placeholder="User" required="" />
               </label>
 
               <label class="label label--login">
-                <input type="password" name="password" id="password" autocomplete="off" class="input input--login input--password" placeholder="Password" required="" />
+                <input type="password" name="password" id="password" autocomplete="off"
+                  class="input input--login input--password" placeholder="Password" required="" />
               </label>
 
               <button type="submit" class="button button--login">Login</button>
@@ -96,8 +107,8 @@
           <?php } ?>
         </div>
       </nav>
-    </header>    
-    
+    </header>
+
     <?php if ( $home && $autenticado ) { ?>
     <!-- Acceso directo -->
     <div class="grid grid--default">
@@ -136,50 +147,51 @@
     <!-- Todos los módulos -->
     <div class="content">
       <?php if ( ! $autenticado ) { ?>
-        <div class="presentation">
-          <div class="presentation__item" data-src="../multimedia/imagen/loyal-services-logo-azul.svg"></div>
-        </div>
+      <div class="presentation">
+        <div class="presentation__item" data-src="../multimedia/imagen/loyal-services-logo-azul.svg"></div>
+      </div>
       <?php } ?>
 
-      
+
       <?php if ( $autenticado ) { ?>
-      
-        <?php if ( $get -> validar( $modServices ) ) { ?>
 
-        <!-- Módulo de servicios -->
-        <section class="update" id="services">
+      <?php if ( $get -> validar( $modServices ) ) { ?>
 
-          <h2 class="title title--center title--uppercase title--base">Add & remove services</h2>
+      <!-- Módulo de servicios -->
+      <section class="update" id="services">
 
-          <div class="form form--content form--medium">
-            <h3 class="title--base">Add Services</h3>
+        <h2 class="title title--center title--uppercase title--base">Add & remove services</h2>
+
+        <div class="form form--content form--medium">
+          <h3 class="title--base">Add Services</h3>
+          <hr>
+
+          <form action="php/procesar.php" method="post" id="form-service" class="form">
+            <label class="form__label">
+              <input type="text" name="title" id="title" class="form__text" placeholder="Title" required="">
+            </label>
+
+            <label class="form__label" id="label-services-description">
+              <textarea name="description" id="description" class="form__text" placeholder="Description" required=""
+                maxlength="190"></textarea>
+              <div class="length"></div>
+            </label>
+
+            <hr>
+            <div class="group-button group-button--right">
+              <button type="submit" class="button button--primary button--right">Add Services</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="form form--content form--listar">
+          <form action="php/procesar.php" method="post" id="eliminar-servicios">
+            <h3 class="title--base">Delete Services:</h3>
             <hr>
 
-            <form action="php/procesar.php" method="post" id="form-service" class="form">
-              <label class="form__label">
-                <input type="text" name="title" id="title" class="form__text" placeholder="Title" required="">
-              </label>
+            <input type="hidden" name="services" id="hidden-services" value="" />
 
-              <label class="form__label" id="label-services-description">
-                <textarea name="description" id="description" class="form__text" placeholder="Description" required="" maxlength="190"></textarea>
-                <div class="length"></div>
-              </label>
-
-              <hr>
-              <div class="group-button group-button--right">
-                <button type="submit" class="button button--primary button--right">Add Services</button>
-              </div>
-            </form>
-          </div>
-
-          <div class="form form--content form--listar">
-            <form action="php/procesar.php" method="post" id="eliminar-servicios">
-              <h3 class="title--base">Delete Services:</h3>
-              <hr>
-
-              <input type="hidden" name="services" id="hidden-services" value="" />
-
-              <div class="grid">
+            <div class="grid">
               <?php
               foreach( $listarServicios as $key => $services ) {
                 echo "  <div class=\"grid__item grid__item--cards grid__item--eliminar grid__item--services\" data-id=\"" . @$services -> idservices . "\">";
@@ -188,48 +200,49 @@
                 echo "  </div>";
               }
               ?>
-              </div>
-            </form>
-          </div>
-        </section>
+            </div>
+          </form>
+        </div>
+      </section>
 
-        <?php } ?>
-        
-        <?php if ( $get -> validar( $modCatalogs ) ) { ?>
-        
-        <!-- Módulo Catálogos -->
-        <section class="update" id="catalogs">
+      <?php } ?>
 
-          <h2 class="title title--center title--uppercase title--base">Add & remove catalogs</h2>
+      <?php if ( $get -> validar( $modCatalogs ) ) { ?>
 
-          <div class="form form--content form--medium">
-            <form action="php/procesar.php" method="post" enctype="multipart/form-data" id="form-ficheros">
-              <h3 class="title--base">Add Catalogs</h3>
-              <hr>
-              
-              <input type="file" name="fichero" id="fichero">
+      <!-- Módulo Catálogos -->
+      <section class="update" id="catalogs">
 
-              <label class="form__label" id="label-catalogs-description">
-                <p>Add a description to the image(optional):</p>
-                <textarea name="catalogs-description" id="catalogs-description" class="form__text" maxlength="190"></textarea>
-                <div class="length"></div>
-              </label>
+        <h2 class="title title--center title--uppercase title--base">Add & remove catalogs</h2>
 
-              <div class="group-button group-button--right">
-                <button type="submit" class="button button--primary">Add Catalogs</button>
-              </div>
-            </form>
-          </div>
-          
-          <h3 class="title--base">Delete Catalogs:</h3>
-          <hr>
+        <div class="form form--content form--medium">
+          <form action="php/procesar.php" method="post" enctype="multipart/form-data" id="form-ficheros">
+            <h3 class="title--base">Add Catalogs</h3>
+            <hr>
 
-          <!-- Listar catálogos -->
-          <div class="form form--content form--listar">
-            <form action="php/procesar.php" method="post" id="eliminar-catalogos">
-              <input type="hidden" name="eliminar-catalogos">
+            <input type="file" name="fichero" id="fichero">
 
-              <div class="grid">
+            <label class="form__label" id="label-catalogs-description">
+              <p>Add a description to the image(optional):</p>
+              <textarea name="catalogs-description" id="catalogs-description" class="form__text"
+                maxlength="190"></textarea>
+              <div class="length"></div>
+            </label>
+
+            <div class="group-button group-button--right">
+              <button type="submit" class="button button--primary">Add Catalogs</button>
+            </div>
+          </form>
+        </div>
+
+        <h3 class="title--base">Delete Catalogs:</h3>
+        <hr>
+
+        <!-- Listar catálogos -->
+        <div class="form form--content form--listar">
+          <form action="php/procesar.php" method="post" id="eliminar-catalogos">
+            <input type="hidden" name="eliminar-catalogos">
+
+            <div class="grid">
               <?php
               foreach( $listarCatalogos as $key => $catalogos ) {
                 echo '<div class="grid__item grid__item--cards grid__item--eliminar grid__item--catalogs" data-id="' . @$catalogos -> idcatalogs . '" tabindex=\'0\'>';
@@ -238,94 +251,202 @@
                 echo '</div>';
               }
               ?>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <?php } ?>
+
+
+      <?php if ( $get -> validar( $modAbout ) ) { ?>
+
+      <!-- Módulo About -->
+      <section class="update" id="about">
+        <h2 class="title title--center title--uppercase title--base">Update About</h2>
+
+        <div class="form form--content">
+          <form action="php/procesar.php" method="post" id="actualizar-about">
+            <input type="hidden" name="identificador" value="<?= @$about -> idabout; ?>">
+
+
+
+            <div class="grid">
+              <div class="grid__item">
+                <label class="form__label">
+                  <p>Mission</p>
+                  <textarea name="mission" id="mission" required=""
+                    class="form__text form__text--ampliar"><?= @$about -> mision; ?></textarea>
+                </label>
+
               </div>
-            </form>
+
+              <div class="grid__item">
+                <label class="form__label">
+                  <p>Vision</p>
+                  <textarea name="vision" id="vision" required=""
+                    class="form__text form__text--ampliar"><?= @$about -> vision; ?></textarea>
+                </label>
+              </div>
+            </div>
+
+            <div class="group-button group-button--right">
+              <div class="pass pass--inline-block"><?= @$_COOKIE['misionvision']; ?></div>
+              <button type="reset" class="button button--primary">Reset</button>
+              <button type="submit" class="button button--primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <?php } ?>
+
+      <?php if ( $get -> validar( $modUser ) ) { ?>
+
+      <!-- Módulo de usuario -->
+      <section class="update" id="users">
+
+        <h2 class="title title--center title--uppercase title--base">Update Password</h2>
+
+        <div class="form form--content form--medium">
+          <form action="php/procesar.php" method="post" id="form-update-password">
+            <label class="form__label">
+              <p>Old Password:</p>
+              <input type="password" name="oldPassword" id="oldPassword" class="form__text" required="">
+            </label>
+
+            <label class="form__label">
+              <p>New Password:</p>
+              <input type="password" name="newPassword" id="newPassword" class="form__text" required="">
+            </label>
+
+            <label class="form__label">
+              <p>Repeat Password:</p>
+              <input type="password" id="repeat-password" class="form__text">
+              <div class="passwords"></div>
+            </label>
+
+            <!-- Obtener el token generado durante el inicio de sesión -->
+            <input type="hidden" name="hashUser" value="<?= $user -> obtenerToken(); ?>">
+
+            <div class="group-button group-button--right">
+              <button type="submit" class="button button--primary">Update Password</button>
+            </div>
+          </form>
+
+          <hr>
+
+          <div class="pass"><?= @$_COOKIE['msg-password']; ?></div>
+        </div>
+      </section>
+
+      <?php } ?>
+
+      <?php if ( $get -> validar( $modCalendar ) ) { ?>
+      <!-- Módulo Calendario  -->
+      <div class="calendar-admin" id="modCalendario">
+        <div class="group-button group-button--right">
+          <?php 
+              $campos = ["ID", "Date Reserve", "Date Register", "Email", "Archive"];
+              if (file_exists("calendar.csv") ) {
+                unlink("calendar.csv");
+              }
+
+              $fCalendario = fopen("calendar.csv", 'w');
+
+              fputcsv($fCalendario, $campos);
+              ?>
+          <a href="calendar.csv" class="button button--primary" download="calendar.csv">Download CSV</a>
+        </div>
+
+        <hr>
+
+        <div class="grid">
+          <?php foreach($calendarioData as $key => $data) { ?>
+          <div class="grid__item grid__item--cards">
+            <div class="title--base">
+              <h3>Reserve Date</h3>
+            </div>
+            <div class="grid__description">
+              <ul class="lista">
+                <li class="lista__item"><strong>Email</strong>: <?= $data["email"]; ?></li>
+                <li class="lista__item"><strong>Date Reserve</strong>: <?= $data["dateReserve"]; ?></li>
+                <li class="lista__item"><strong>Application date</strong>: <?= $data["dateReserve"]; ?></li>
+              </ul>
+
+              <hr>
+
+              <div class="flex flex--wrap">
+                <?php if ( (int) $data["archive"] === 0 ) {?>
+                <form action="php/procesar.php" method="post" class="padding padding--right">
+                  <input type="hidden" name="archivarFecha" value="<?= $data["idcalendar"];?>">
+                  <button type="submit" class="button button--archivar">Archive</button>
+                </form>
+                <?php }?>
+
+                <form action="php/procesar.php" method="post">
+                  <input type="hidden" name="eliminarFecha" value="<?= $data["idcalendar"];?>">
+                  <button type="submit" class="button button--eliminar">Delete</button>
+                </form>
+              </div>
+            </div>
+
+            <?php fputcsv( $fCalendario, $data ); ?>
           </div>
-        </section>
-        
-        <?php } ?>
-        
+          <?php } ?>
+        </div>
+      </div>
 
-        <?php if ( $get -> validar( $modAbout ) ) { ?>
+      <?php fclose($fCalendario); ?>
+      <?php } ?>
 
-        <!-- Módulo About -->
-        <section class="update" id="about">
-          <h2 class="title title--center title--uppercase title--base">Update About</h2>
+      <!-- Correos electrónicos -->
+      <?php if ( $get -> validar( $modEmail ) ) { ?>
+      <!-- Módulo Calendario  -->
+      <div class="calendar-admin" id="modCalendario">
+        <div class="group-button group-button--right">
+          <?php
+              // Campos del archivo de correos electrónicos:
+              $campos = ["Code", "Email", "dateRegister"];
 
-          <div class="form form--content">
-            <form action="php/procesar.php" method="post" id="actualizar-about">
-              <input type="hidden" name="identificador" value="<?= @$about -> idabout; ?>">
-              
-              
+              // Eliminar el archivo "emails.csv" si existe:
+              if (file_exists("emails.csv") ) {
+                unlink("emails.csv");
+              }
 
-              <div class="grid">
-                <div class="grid__item">
-                  <label class="form__label">
-                    <p>Mission</p>
-                    <textarea name="mission" id="mission" required="" class="form__text form__text--ampliar"><?= @$about -> mision; ?></textarea>
-                  </label>
+              $fEmails = fopen("emails.csv", 'w');
 
-                </div>
-                
-                <div class="grid__item">
-                  <label class="form__label">
-                    <p>Vision</p>
-                    <textarea name="vision" id="vision" required="" class="form__text form__text--ampliar"><?= @$about -> vision; ?></textarea>
-                  </label>
-                </div>
-              </div>
+              fputcsv($fEmails, $campos);
+              ?>
+          <a href="emails.csv" class="button button--primary" download="emails.csv">Download CSV</a>
+        </div>
 
-              <div class="group-button group-button--right">
-                <div class="pass pass--inline-block"><?= @$_COOKIE['misionvision']; ?></div>
-                <button type="reset" class="button button--primary">Reset</button>
-                <button type="submit" class="button button--primary">Update</button>
-              </div>
-            </form>
+        <hr>
+
+        <div class="grid">
+          <?php foreach($emailData as $key => $registro) { ?>
+          <div class="grid__item grid__item--cards">
+            <div class="title--base width fondo fondo--base-alfa padding padding--all">
+              <h3 class="margin">Email</h3>
+            </div>
+
+            <div class="grid__description">
+              <ul class="lista">
+                <li class="lista__item"><strong>Code</strong>: <?= $registro["idemails"]; ?></li>
+                <li class="lista__item"><strong>Email</strong>: <?= $registro["email"]; ?></li>
+                <li class="lista__item"><strong>Date Register</strong>: <?= $registro["dateRegister"]; ?></li>
+              </ul>
+            </div>
+
+            <?php fputcsv( $fEmails, $registro ); ?>
           </div>
-        </section>
+          <?php } ?>
+        </div>
+      </div>
 
-        <?php } ?>
-        
-        <?php if ( $get -> validar( $modUser ) ) { ?>
-          
-        <!-- Módulo de usuario -->
-        <section class="update" id="users">
+      <?php fclose($fEmails); ?>
+      <?php } ?>
 
-          <h2 class="title title--center title--uppercase title--base">Update Password</h2>
-
-          <div class="form form--content form--medium">
-            <form action="php/procesar.php" method="post" id="form-update-password">
-              <label class="form__label">
-                <p>Old Password:</p>
-                <input type="password" name="oldPassword" id="oldPassword" class="form__text" required="">
-              </label>
-
-              <label class="form__label">
-                <p>New Password:</p>
-                <input type="password" name="newPassword" id="newPassword" class="form__text" required="">
-              </label>
-
-              <label class="form__label">
-                <p>Repeat Password:</p>
-                <input type="password" id="repeat-password" class="form__text">
-                <div class="passwords"></div>
-              </label>
-
-              <!-- Obtener el token generado durante el inicio de sesión -->
-              <input type="hidden" name="hashUser" value="<?= $user -> obtenerToken(); ?>">
-
-              <div class="group-button group-button--right">
-                <button type="submit" class="button button--primary">Update Password</button>
-              </div>
-            </form>
-            
-            <hr>
-
-            <div class="pass"><?= @$_COOKIE['msg-password']; ?></div>
-          </div>
-        </section>
-        
-        <?php } ?>
 
       <?php } ?>
     </div>
