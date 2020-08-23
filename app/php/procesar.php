@@ -283,7 +283,6 @@ header("Content-Type: application/json; charset=utf-8");
   ];
 
   if ( $post -> validar( $eliminarReserva) ) {
-    echo json_encode( $eliminarCalendario );
     $eliminarCalendario -> execute([
       ":id" => (int) $_POST['eliminarFecha']
     ]);
