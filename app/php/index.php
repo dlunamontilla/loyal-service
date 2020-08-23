@@ -14,6 +14,7 @@ include __DIR__ . "/DLSubir.php";
 include __DIR__ . "/DLUser.php";
 include __DIR__ . "/DLPeticiones.php";
 include __DIR__ . "/DLCalendario.php";
+include __DIR__ . "/DLProtocolo.php";
 include __DIR__ . "/query.php";
 include __DIR__ . "/reCAPTCHA.php";
 ?>

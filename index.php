@@ -1,3 +1,16 @@
+<?php
+  include __DIR__ . "/app/php/index.php";
+
+  // Registrar los dominios sobres los que se va a aplicar:
+  $protocolo = new DLProtocolo([
+    "loyalservicesca.com",
+    "www.loyalservicesca.com"
+  ]);
+  
+  // Forzar a utilizar el protocolo HTTPS:
+  $protocolo -> https();
+?>
+
 <!DOCTYPE html>
 <html lang="en-CA">
 

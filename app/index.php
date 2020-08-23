@@ -5,6 +5,16 @@
   $post = new DLPeticiones( "post" );
   $get = new DLPeticiones( "get" );
 
+  // Registrar los dominios sobres los que se va a aplicar:
+  $protocolo = new DLProtocolo([
+    "loyalservicesca.com",
+    "www.loyalservicesca.com"
+  ]);
+  
+  // Forzar a utilizar el protocolo HTTPS:
+  $protocolo -> https();
+  
+
   // Validar peticiones:
   $login = [
     "user" => false,
