@@ -116,18 +116,25 @@ const styles = ( _styles: string ) => {
 
 // Cargar imágenes vectoriales. El primer parámetro es 
 // el elemento y el segundo la ruta de la imagen vectorial:
-const imagen = async (_elemento: Element, _ruta: string) => {
+const imagen = (_elemento: Element, _ruta: string) => {
 	if (typeof _ruta !== "string")
 		return;
 
 	if (_ruta.trim().length < 2)
 		return;
 
-	const res = await fetch(_ruta),
-		recurso = await res.text();
+	fetch(_ruta)
+		.then(function(respuesta) {
+			return respuesta.text();
+		})
+		.then(function( string ) {
+			_elemento.innerHTML = string;
 
-	_elemento.insertAdjacentHTML("beforeend", recurso);
-	styles("style.css");
+			styles("style.css");
+		})
+		.catch(function(error) {
+			console.log( error );
+		});
 }
 
 // Validar correo:

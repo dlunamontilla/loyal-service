@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 const elemento = (_selector) => {
     return document.querySelector(_selector);
 };
@@ -76,15 +67,23 @@ const styles = (_styles) => {
             break;
         }
 };
-const imagen = (_elemento, _ruta) => __awaiter(this, void 0, void 0, function* () {
+const imagen = (_elemento, _ruta) => {
     if (typeof _ruta !== "string")
         return;
     if (_ruta.trim().length < 2)
         return;
-    const res = yield fetch(_ruta), recurso = yield res.text();
-    _elemento.insertAdjacentHTML("beforeend", recurso);
-    styles("style.css");
-});
+    fetch(_ruta)
+        .then(function (respuesta) {
+        return respuesta.text();
+    })
+        .then(function (string) {
+        _elemento.innerHTML = string;
+        styles("style.css");
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
+};
 const isEmail = (_correo) => {
     return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(_correo);
 };
