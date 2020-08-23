@@ -403,7 +403,7 @@
       <!-- Correos electrónicos -->
       <?php if ( $get -> validar( $modEmail ) ) { ?>
       <!-- Módulo Calendario  -->
-      <div class="calendar-admin" id="modCalendario">
+      <div class="calendar-admin" id="modEmail">
         <div class="group-button group-button--right">
           <?php
               // Campos del archivo de correos electrónicos:
@@ -436,6 +436,13 @@
                 <li class="lista__item"><strong>Email</strong>: <?= $registro["email"]; ?></li>
                 <li class="lista__item"><strong>Date Register</strong>: <?= $registro["dateRegister"]; ?></li>
               </ul>
+
+              <div class="group-button">
+                <form action="php/procesar.php" method="post" class="group-button group-button--right" id="form-email-<?= $registro['idemails']; ?>">
+                  <input type="hidden" name="eliminarCorreo" value="<?= $registro['idemails']; ?>">
+                  <button type="submit" class="button button--eliminar">Delete</button>
+                </form>
+              </div>
             </div>
 
             <?php fputcsv( $fEmails, $registro ); ?>

@@ -308,10 +308,24 @@ pre, code {
   color: white;
   font-weight: bold;
 }
+.button--eliminar:hover {
+  background-color: red;
+  transition: none;
+}
+.button--eliminar:active {
+  background-color: #e60000;
+}
 .button--archivar {
-  background-color: #f06600;
+  background-color: #ff6600;
   color: white;
   font-weight: bold;
+}
+.button--archivar:hover {
+  transition: none;
+  background-color: #e65c00;
+}
+.button--archivar:active {
+  background-color: #ff6600;
 }
 
 .content-input {

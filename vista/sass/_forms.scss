@@ -162,12 +162,32 @@
     background-color: darken( red, 5 );
     color: white;
     font-weight: bold;
+
+    &:hover {
+      background-color: red;
+      transition: none;
+    }
+
+    &:active {
+      background-color: darken( red, 5 );
+    }
   }
 
   &--archivar {
-    background-color: #f06600;
+    $color: #ff6600;
+
+    background-color: $color;
     color: white;
     font-weight: bold;
+
+    &:hover {
+      transition: none;
+      background-color: darken($color, 5);
+    }
+
+    &:active {
+      background-color: $color;
+    }
   }
 }
 

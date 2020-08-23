@@ -45,6 +45,9 @@ $obtenerCalendario = $pdo -> prepare("SELECT * FROM calendar WHERE dateRegister 
 # Agregar correo electrónico:
 $agregarCorreo = $pdo -> prepare("INSERT INTO emails VALUES(NULL, :email, NOW());");
 
+# Eliminar Correo:
+$eliminarEmail = $pdo -> prepare("DELETE FROM emails WHERE idemails = :id");
+
 # Obtener correo:
 $obtenerCorreo = $pdo -> prepare("SELECT * FROM emails WHERE dateRegister LIKE '%$fc%' ORDER BY dateRegister DESC limit 1000");
 ?>

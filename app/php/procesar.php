@@ -289,3 +289,16 @@ header("Content-Type: application/json; charset=utf-8");
 
     header("Location: ../?calendar#modCalendario");
   }
+
+  // $eliminarCorreo
+  $eliminarCorreo = [
+    "eliminarCorreo" => false
+  ];
+
+  if ( $post -> validar( $eliminarCorreo ) ) {
+    $eliminarEmail -> execute([
+      ":id" => (int) $_POST['eliminarCorreo']
+    ]);
+
+    header("Location: ../?email#modEmail");
+  }
