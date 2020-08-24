@@ -5,7 +5,7 @@
   $post = new DLPeticiones( "post" );
   $get = new DLPeticiones( "get" );
 
-  function meseReservados( $fecha ) {
+  function mesesReservados( $fecha ) {
     $mesesReservados = [
       "January",
       "February",
@@ -16,6 +16,7 @@
       "July",
       "August",
       "September",
+      "October",
       "November",
       "December"
     ];
@@ -408,7 +409,8 @@
             </div>
             <div class="grid__description">
               <div class="fecha-reservada">
-                <strong>Date Reserve: </strong><br><?= meseReservados($data["dateReserve"]); ?>
+                <strong>Date Reserve: </strong><br><?= mesesReservados($data["dateReserve"]); ?>
+                <br><?= $data["dateReserve"]; ?>
               </div>
               
               <ul class="lista">

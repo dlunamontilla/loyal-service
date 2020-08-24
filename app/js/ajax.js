@@ -88,8 +88,6 @@ var enviarFormulario = function enviarFormulario(_ruta, _form) {
 
       let informarReserva = elemento("#informar-reserva");
 
-      console.log( "informar =>", informarReserva );
-
       if ( informarReserva !== null ) {
         informarReserva.textContent = json.info;
 
