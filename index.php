@@ -24,6 +24,9 @@
   <link rel="icon" href="multimedia/imagen/favicon.png" type="image/png">
   <link rel="shortcut icon" href="multimedia/imagen/favicon.ico" type="image/x-icon">
 
+  <!-- Agregando CHAT (JivoChat) -->
+  <script src="//code.jivosite.com/widget/sA5TgHg0Nf" async></script>
+
   <!-- Estilos -->
   <link rel="stylesheet" href="vista/css/style.css?v3">
   <script src="app/library/smoothscroll.js"></script>
@@ -306,9 +309,6 @@
   </main>
   <script src="app/js/main.js"></script>
   <script src="app/js/ajax.js"></script>
-
-  <script
-    src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54e9d46555872d772f8ec6caa8330b060c036f31ece6d43336cb1cb41eb6fede.js"></script>
 </body>
 
 </html>
