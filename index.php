@@ -235,7 +235,7 @@
                 <p>WhatsApp:</p>
                 <p class="whatsapp__parrafo">
                   <a class="whatsapp__enlace social-icon social-icon--whatsapp"
-                    href="https://api.whatsapp.com/send?phone=16477004965&text=Mensaje%20de%20prueba" target="_blank">
+                    href="https://web.whatsapp.com/send?phone=16477004965&text=" target="_blank">
                     <span data-src="multimedia/imagen/whatsapp.svg"></span>
                     +1 647 700 4965
                   </a>
