@@ -410,7 +410,6 @@
             <div class="grid__description">
               <div class="fecha-reservada">
                 <strong>Date Reserve: </strong><br><?= mesesReservados($data["dateReserve"]); ?>
-                <br><?= $data["dateReserve"]; ?>
               </div>
               
               <ul class="lista">
