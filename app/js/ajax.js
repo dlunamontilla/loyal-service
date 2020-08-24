@@ -95,6 +95,13 @@ var enviarFormulario = function enviarFormulario(_ruta, _form) {
 
         if ( json.status === true ) {
           informarReserva.setAttribute("class", "info info--success");
+
+          let salir = elemento("[data-action='salir']");
+          // data-action="salir"
+          setTimeout(function() {
+            if ( salir !== null )
+              salir.click();
+          }, 3000);
         }else {
           informarReserva.setAttribute("class", "info info--warning");
         }
@@ -300,7 +307,7 @@ const calendario = (_ruta, _main) => {
         e.preventDefault();
 
         if (fechaSeleccionada.value === "") {
-          alert("Debes seleccionar una fecha antes de continuar");
+          alert("You must select a date before continuing");
           return;
         }
 

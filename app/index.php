@@ -5,6 +5,35 @@
   $post = new DLPeticiones( "post" );
   $get = new DLPeticiones( "get" );
 
+  function meseReservados( $fecha ) {
+    $mesesReservados = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "November",
+      "December"
+    ];
+
+    $elementos = explode("-", $fecha);
+    $dia = (string) $elementos[2];
+    $mes = (int) $elementos[1];
+    $año = (int) $elementos[0];
+
+    $mes--;
+
+    if ( ! array_key_exists($mes, $mesesReservados) ) {
+      return "";
+    }
+
+    return $mesesReservados[$mes] . " $dia, " . $año;
+  }
+
   // Registrar los dominios sobres los que se va a aplicar:
   $protocolo = new DLProtocolo([
     "loyalservicesca.com",
@@ -378,10 +407,13 @@
               <h3>Reserve Date</h3>
             </div>
             <div class="grid__description">
+              <div class="fecha-reservada">
+                <strong>Date Reserve: </strong><br><?= meseReservados($data["dateReserve"]); ?>
+              </div>
+              
               <ul class="lista">
                 <li class="lista__item"><strong>Email</strong>: <?= $data["email"]; ?></li>
-                <li class="lista__item"><strong>Date Reserve</strong>: <?= $data["dateReserve"]; ?></li>
-                <li class="lista__item"><strong>Application date</strong>: <?= $data["dateReserve"]; ?></li>
+                <li class="lista__item"><strong>Application date</strong>: <?= $data["dateRegister"]; ?></li>
               </ul>
 
               <hr>
@@ -412,7 +444,7 @@
 
       <!-- Correos electrónicos -->
       <?php if ( $get -> validar( $modEmail ) ) { ?>
-      <!-- Módulo Calendario  -->
+      <!-- Módulo Email  -->
       <div class="calendar-admin" id="modEmail">
         <div class="group-button group-button--right">
           <?php
