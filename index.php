@@ -69,7 +69,8 @@
   </template>
 
   <template id="template-button-tel">
-    <a href="tel:+16477004965" class="button button--flex button--tel button--block">647 700 4965</a>
+    <span></span>
+    <!-- <a href="tel:+16477004965" class="button button--flex button--tel button--block">647 700 4965</a> -->
   </template>
 
   <template id="menu-item">
