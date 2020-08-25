@@ -248,7 +248,7 @@
                 <p>
                   <a href="mailto:loyalservices.ca@gmail.com" class="social-icon social-icon--generico">
                     <span data-src="multimedia/imagen/envelope.svg"></span>
-                    loyalservices.ca@gmail.com
+                    loyalservices.ca@gmail.com&nbsp;
                   </a>
                 </p>
               </div>
