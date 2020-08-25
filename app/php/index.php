@@ -1,4 +1,5 @@
 <?php
+include __DIR__ . "/data.php";
 $config = __DIR__ . "/config.php";
 
 if ( ! file_exists( $config ) ) {

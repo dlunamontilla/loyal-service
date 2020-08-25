@@ -71,6 +71,7 @@
 		}
 
 		public function validar( $lists = [] ) : bool {
+			
 			if ( !is_array($lists) )
 				return false;
 
@@ -104,7 +105,7 @@
 
 				return true;
 			}
-
+		
 			return false;
 		}
 

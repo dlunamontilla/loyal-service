@@ -20,6 +20,7 @@ class DLProtocolo {
   }
 
   public function https() {
+
     $serverName = (string) strtolower($_SERVER['SERVER_NAME']);
     $https = array_key_exists('HTTPS', $_SERVER);
     $url = (string) $_SERVER['REQUEST_URI'];
