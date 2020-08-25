@@ -52,6 +52,7 @@ class DLUser extends DLCookies {
   // base de datos. En este caso, $this -> comprobarHash representará
   // el valor obtenido de la base de datos:
   public function autenticado( string $hash ) : bool {
+    
     return (
       ! isset( $hash ) ||
       empty(trim($hash)) ||
@@ -113,3 +114,4 @@ class DLUser extends DLCookies {
     return "";
   }
 };
+?>

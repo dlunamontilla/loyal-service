@@ -1,9 +1,15 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
-$DLTools = "../php/index.php";
+$DLTools = "../../app/php/index.php";
+
+if ( !file_exists( $DLTools) ) {
+  echo json_encode([
+    "NO se encontró el archivo"
+  ]);
+  exit;
+}
 
 include $DLTools;
-
 $get = new DLPeticiones( "get" );
 $post = new DLPeticiones( "post" );
 

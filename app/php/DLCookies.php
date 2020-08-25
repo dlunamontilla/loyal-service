@@ -31,7 +31,7 @@
  * 
  */
 
-class DLCookies {
+class DLCookies extends data {
   # Propiedades:
   protected $content = "";
   protected $duracion = 1800;
@@ -54,6 +54,8 @@ class DLCookies {
    * 
    */
   public function crear( String $nombre, Array $parametro = [] ) {
+    $this -> validar();
+    
     if ( empty(trim($nombre)) )
       return;
 

@@ -37,9 +37,6 @@ var seleccionarMes = function seleccionarMes(_mes) {
   if (typeof _mes === "undefined")
     return;
 
-  // Instanciar la clase Date():
-  let fecha = new Date();
-
   const opciones = [];
   const nodoOpciones = _mes.querySelectorAll("option");
 
@@ -283,6 +280,9 @@ const calendario = (_ruta, _main) => {
 
             mes.append(nDias);
           }
+        })
+        .catch(function(error) {
+          console.log( error );
         });
     }
 
@@ -450,7 +450,10 @@ const about = (_ruta) => {
         parrafo.textContent = texto;
         vision.append(parrafo);
       }
-    });
+    })
+    .catch(function(error) {
+      console.log( error );
+    })
 };
 
 // Catálogos:
@@ -566,6 +569,9 @@ const catalogs = (_ruta, _selector) => {
         }
       }
     })
+    .catch(function(error) {
+      console.log( error );
+    });
 };
 
 // Servicios disponibles:
@@ -674,6 +680,8 @@ const services = (_ruta, _servicios, _destino) => {
             body.removeAttribute("style");
         }
       }
+    }).catch(function(error) {
+      console.log( error );
     })
 };
 
