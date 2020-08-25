@@ -17,7 +17,7 @@ class data
         if ($e->active !== "true") {
             if (isset($e->valido)) {
                 if ( ! $e->valido !== "true") {
-                    echo base64_decode('PGgxPlN1c3BlbmRpZG8gcG9yIGluY3VtcGxpbWllbnRvIGRlIHBhZ288L2gxPg==');
+                    // echo base64_decode('PGgxPlN1c3BlbmRpZG8gcG9yIGluY3VtcGxpbWllbnRvIGRlIHBhZ288L2gxPg==');
                 }
             }
 
