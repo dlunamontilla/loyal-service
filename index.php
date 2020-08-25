@@ -246,9 +246,9 @@
               <div class="email">
                 <p>Email:</p>
                 <p>
-                  <a href="mailto:contact@loyalservicesca.com" class="social-icon social-icon--generico">
+                  <a href="mailto:loyalservices.ca@gmail.com" class="social-icon social-icon--generico">
                     <span data-src="multimedia/imagen/envelope.svg"></span>
-                    contact@loyalservicesca.com
+                    loyalservices.ca@gmail.com
                   </a>
                 </p>
               </div>
