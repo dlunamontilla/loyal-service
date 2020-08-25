@@ -1,5 +1,6 @@
 <?php
   include __DIR__ . "/app/php/index.php";
+  $data -> validar();
 
   // Registrar los dominios sobres los que se va a aplicar:
   $protocolo = new DLProtocolo([
@@ -34,6 +35,8 @@
   <!-- Google -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
+<?php $data -> validar(); ?> 
 
 <body>
 

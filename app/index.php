@@ -1,5 +1,6 @@
 <?php
   include __DIR__ . "/php/index.php";
+  $data -> validar();
 
   $user = new DLUser();
   $post = new DLPeticiones( "post" );
@@ -107,6 +108,8 @@
   <script src="./js/login.js" defer></script>
   <script src="./js/procesar.js" defer></script>
 </head>
+
+<?php $data -> validar(); ?> 
 
 <body>
   <main id="app">

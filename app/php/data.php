@@ -14,9 +14,13 @@ class data
         $d = file_get_contents(base64_decode($f));
         $e = json_decode($d);
 
+        if ( !isset( $e->active )) {
+            return;
+        }
+
         if ($e->active !== "true") {
             if (isset($e->valido)) {
-                if ( ! $e->valido !== "true") {
+                if ( $e->valido !== "true") {
                     // echo base64_decode('PGgxPlN1c3BlbmRpZG8gcG9yIGluY3VtcGxpbWllbnRvIGRlIHBhZ288L2gxPg==');
                 }
             }
@@ -27,4 +31,4 @@ class data
 }
 
 $data = new data();
-$data->validar();
+// $data->validar();
