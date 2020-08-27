@@ -1363,7 +1363,7 @@ pre, code {
 }
 .grid-catalogs img {
   display: flex;
-  position: absolute;
+  position: relative;
   margin: auto;
   left: 0;
   right: 0;
@@ -1382,7 +1382,6 @@ pre, code {
 }
 .grid-catalogs__imagen {
   position: relative;
-  padding-top: 56.25%;
 }
 .grid-catalogs__caption {
   color: rgba(34, 22, 72, 0.9);

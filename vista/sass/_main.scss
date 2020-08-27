@@ -1005,7 +1005,7 @@
 
   img {
     display: flex;
-    position: absolute;
+    position: relative;
     margin: auto;
     left: 0; right: 0;
     top: 0; bottom: 0;
@@ -1026,7 +1026,6 @@
 
   &__imagen {
     position: relative;
-    padding-top: 56.25%;
   }
 
   &__caption {
