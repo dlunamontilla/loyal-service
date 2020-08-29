@@ -5,7 +5,8 @@
 El sitio Web se encuentra utilizando la siguiente fuente tipográfica:
 
 ``` css
-font-family: 'Roboto', sans-serif;
+font-family: 'Roboto',
+sans-serif;
 ```
 
 La página comprueba primero si en el computador del usuario se encuentra instalado, de lo contrario utilizará las fuentes ofrecida por Google a través de una API de forma automática.
@@ -36,4 +37,16 @@ Estas son las secciones:
 
 ``` none
  loyalservices.ca@gmail.com
+```
+
+Puede clonar el proyecto entero escribiendo la siguiente línea:
+
+``` bash
+git clone https://github.com/dlunamontilla/loyal-service.git
+```
+
+Una vez hayas clonado el proyecto puede proceder a obtener la rama `development` de la siguiente forma:
+
+``` bash
+git fetch && git checkout development
 ```
