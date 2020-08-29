@@ -1,6 +1,7 @@
 Recursos
 node_modules
 app/php/config.php
+app/php/*.md
 uploads
 .htaccess
 loyalserivc*.*
