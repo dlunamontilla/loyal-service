@@ -1,9 +1,9 @@
 <?php
-# Datos de conexión con la base de datos:
-  $dsn = "mysql:dbname=baseDeDatos;host=127.0.0.1";
+// Conexión con la base de datos:
+  $dsn = "mysql:dbname=loyalservice;host=127.0.0.1";
   $usuario = "usuario";
   $contraseña = "contraseña";
 
-# Conectar con una base de datos mediante el instanciamiento
-# de la clase PDO:
+# INSTANCIAR EL OBJETO PDO:
 $pdo = new PDO( $dsn, $usuario, $contraseña );
+?>

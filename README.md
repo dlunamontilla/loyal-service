@@ -1,46 +1,39 @@
 # Loyal Services
 
-> **Importante:**
->
-> Este sitio Web aún no está listo para visualizarse en dispositivos móviles o de pantallas pequeñas. Esa parte será en la versión final.
-
 ## Fuentes tipográficas
 
-Se utilizarán como fuentes predeterminada:
+El sitio Web se encuentra utilizando la siguiente fuente tipográfica:
 
 ``` css
 font-family: 'Roboto', sans-serif;
 ```
 
-La fuente para el logotipo es `Garamond Bold`
+La página comprueba primero si en el computador del usuario se encuentra instalado, de lo contrario utilizará las fuentes ofrecida por Google a través de una API de forma automática.
 
-En producción se implementará entre las etiquetas `<head></head>` lo siguiente:
+La fuente para su logotipo es **Garamond Bold.**
 
-``` html
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
-```
-
-Mientras tanto, se está utilizando la importación local durante la etapa de desarrollo:
+Se tiene acceso a la tipografía utilizada por la página mediante la siguiente línea:
 
 ``` scss
 @import "../css/roboto.css";
 ```
 
-## Secciones
+Se ubica en la línea 3.
 
-El sitio Web está constituido por cinco secciones más un pie de página las cuales son:
+## Estructura
 
-+ Inicio.
-+ Servicios.
-+ Nosotros.
-+ Contacto.
+El sitio Web está constituido por cinco secciones, una agenda y panel de administración, además, de contar con el **reCAPTCHA** de Google.
 
-Adicionalmente a los incisos anteriores, el **pie de página**.
+Estas son las secciones:
 
-Cada sección tiene una imagen de fondo que identica las acciones que se pueden realizar en ellas.
+* HOME.
+* Services.
+* Catalogs.
+* About.
+* Contact.
 
-Correo:
+**Correo:**
 
 ``` none
-loyalservicesca2020@gmail.com
+ loyalservices.ca@gmail.com
 ```
