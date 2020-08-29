@@ -50,3 +50,12 @@ Una vez hayas clonado el proyecto puede proceder a obtener la rama `development`
 ``` bash
 git fetch && git checkout development
 ```
+
+
+## Biblioteca
+
+Tome en cuenta que la biblioteca que utiliza este proyecto está publicado pertenece a **David E Luna M** y está publicado bajo la licencia MIT.
+
+Puede acceder a los archivos de la [biblioteca junto a su documentación][biblioteca]
+
+[biblioteca]:https://github.com/dlunamontilla/loyal-service/tree/master/app/php "Ir a la bibliote y su documentación"
