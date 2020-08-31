@@ -50,10 +50,22 @@ Una vez hayas clonado el proyecto puede proceder a obtener la rama `development`
 ``` bash
 git fetch && git checkout development
 ```
+## Instalación del proyecto
 
-## Biblioteca
+Para instalar su proyecto ubique el archivo `config.php.sample` en el directorio `app/php/` y renómbrelo como `config.php`. Luego ubique en las líneas `3`, `4` y `5` lo siguiente:
 
-Tome en cuenta que la biblioteca que utiliza este proyecto está publicado pertenece a **David E Luna M** y está publicado bajo la licencia MIT.
+``` php
+...
+$dsn = "mysql:dbname=nombre_de_la_base_de_datos;host=127.0.0.1";
+$usuario = "usuario_base_de_datos";
+$contraseña = "Contraseña_de_la_base_de_datos";
+```
+
+Y actualice el **nombre de la base de datos** y las credenciales asociadas a ella.
+
+## Biblioteca que utiliza el proyecto
+
+Tenga en cuenta que la biblioteca que utiliza este proyecto pertenece a **David E Luna M** y está publicado bajo la licencia MIT.
 
 Puede acceder a los archivos de la [biblioteca junto a su documentación][biblioteca]
 
