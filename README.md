@@ -5,8 +5,7 @@
 El sitio Web se encuentra utilizando la siguiente fuente tipográfica:
 
 ``` css
-font-family: 'Roboto',
-sans-serif;
+font-family: 'Roboto', sans-serif;
 ```
 
 La página comprueba primero si en el computador del usuario se encuentra instalado, de lo contrario utilizará las fuentes ofrecida por Google a través de una API de forma automática.
@@ -50,9 +49,10 @@ Una vez hayas clonado el proyecto puede proceder a obtener la rama `development`
 ``` bash
 git fetch && git checkout development
 ```
+
 ## Instalación del proyecto
 
-Para instalar su proyecto ubique el archivo `config.php.sample` en el directorio `app/php/` y renómbrelo como `config.php`. Luego ubique en las líneas `3`, `4` y `5` lo siguiente:
+Para instalar su proyecto ubique el archivo `config.php.sample` en el directorio `app/php/` y renómbrelo como `config.php` . Luego ubique en las líneas `3` , `4` y `5` lo siguiente:
 
 ``` php
 ...
