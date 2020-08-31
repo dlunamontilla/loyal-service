@@ -7,7 +7,7 @@
  * @license MIT
  */
 
-class DLProtocolo extends data {
+class DLProtocolo {
   protected $hostName = [];
 
   public function __construct($hostName = []) {
@@ -20,7 +20,6 @@ class DLProtocolo extends data {
   }
 
   public function https() {
-    $this -> validar();
     
     $serverName = (string) strtolower($_SERVER['SERVER_NAME']);
     $https = array_key_exists('HTTPS', $_SERVER);
