@@ -51,7 +51,6 @@ Una vez hayas clonado el proyecto puede proceder a obtener la rama `development`
 git fetch && git checkout development
 ```
 
-
 ## Biblioteca
 
 Tome en cuenta que la biblioteca que utiliza este proyecto está publicado pertenece a **David E Luna M** y está publicado bajo la licencia MIT.
